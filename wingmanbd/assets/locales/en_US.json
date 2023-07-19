@@ -1,0 +1,97 @@
+{
+    "app": {
+        "name": "WingMan",
+        "under_development": "Under development",
+        "coming_soon": "Coming soon..."
+    },
+    "auth": {
+        "welcome": "Welcome to WingMan!",
+        "label": {
+            "name": "Name",
+            "mobile": "Mobile number",
+            "email": "Email (optional)",
+            "password": "Password",
+            "confirm_password": "Confirm password"
+        },
+        "button": {
+            "sign_in": "Sign in",
+            "sign_up": "Sign up"
+        },
+        "instruction": {
+            "sign_up_part1": "Not joined yet?",
+            "sign_up_part2": "Sign up Now",
+            "sign_in_part1": "Already have an account?",
+            "sign_in_part2": "Sign in"
+        },
+        "error": {
+            "name": "Tell us your name!",
+            "mobile": "Invalid mobile number!",
+            "email": "Invalid email!",
+            "password": {
+                "length": "Minimum length is 8!",
+                "not_matched": "Password not matched!",
+                "wrong": "Wrong password!"
+            },
+            "no_account": "No account found with this mobile number!",
+            "sign_in": "Incorrect mobile number or password!",
+            "sign_up": "Account already exist with this mobile"
+        }
+    },
+    "dashboard": {
+        "hello_user": "Hello @name",
+        "welcome_user": "Welcome to WingMan!",
+        "total_plants": "@count plants"
+    },
+    "setting": {
+        "title": "Settings",
+        "item": {
+            "profile": "Profile",
+            "version": "Version"
+        }
+    },
+    "profile": {
+        "title": "Profile",
+        "item": {
+            "address_book": "Address Book",
+            "change_mobile": "Change Mobile",
+            "change_password": "Change Password",
+            "logout": "Logout"
+        },
+        "label": {
+            "name": "Name",
+            "email": "Email"
+        },
+        "error": {
+            "name": "Loading...",
+            "email": "No email address provided yet!"
+        }
+    },
+    "address": {
+        "title": "Address",
+        "label": {
+            "name": "Name: ",
+            "mobile": "Mobile: ",
+            "division": "Division: ",
+            "city": "City: ",
+            "area": "Area: ",
+            "addressLine": "Address Line: ",
+            "label": "Label (Optional): Ex. Home",
+            "make_default": "Make this your default address"
+        },
+        "button": {
+            "save": "Save",
+            "delete": "Delete"
+        },
+        "error": {
+            "name": "Provide a name",
+            "mobile": "Invalid mobile number!",
+            "addressLine": "Invalid address!",
+            "division": "Please select a division",
+            "city": "Please select a city",
+            "area": "Please select a area"
+        }
+    },
+    "address_book": {
+        "title": "Address Book"
+    }
+}

@@ -1,0 +1,97 @@
+{
+    "app": {
+        "name": "বাগানী",
+        "under_development": "Under development",
+        "coming_soon": "Coming soon..."
+    },
+    "auth": {
+        "welcome": "বাগানীতে আপনাকে স্বাগতম!",
+        "label": {
+            "name": "নাম",
+            "mobile": "মোবাইল নং",
+            "email": "ইমেইল (optional)",
+            "password": "পাসওয়ার্ড",
+            "confirm_password": "Confirm password"
+        },
+        "button": {
+            "sign_in": "সাইন ইন",
+            "sign_up": "সাইন আপ"
+        },
+        "instruction": {
+            "sign_up_part1": "এখনও যোগদান করেননি?",
+            "sign_up_part2": "এখনই সাইন আপ করুন",
+            "sign_in_part1": "ইতিমধ্যে একটি অ্যাকাউন্ট আছে?",
+            "sign_in_part2": "সাইন ইন করুন"
+        },
+        "error": {
+            "name": "নাম দিন!",
+            "mobile": "অবৈধ মোবাইল নম্বর!",
+            "email": "অবৈধ ইমেইল!",
+            "password": {
+                "length": "সর্বনিম্ন দৈর্ঘ্য ৮!",
+                "not_matched": "পাসওয়ার্ড মিলেনি!",
+                "wrong": "ভুল পাসওয়ার্ড!"
+            },
+            "no_account": "এই মোবাইল নম্বরের সাথে কোনও অ্যাকাউন্ট পাওয়া যায় নি!",
+            "sign_in": "Incorrect mobile number or password!",
+            "sign_up": "Account already exist with this mobile"
+        }
+    },
+    "dashboard": {
+        "hello_user": "Hello @name",
+        "welcome_user": "Welcome to WingMan BD!",
+        "total_plants": "@count plants"
+    },
+    "setting": {
+        "title": "Settings",
+        "item": {
+            "profile": "Profile",
+            "version": "Version"
+        }
+    },
+    "profile": {
+        "title": "Profile",
+        "item": {
+            "address_book": "Address Book",
+            "change_mobile": "Change Mobile",
+            "change_password": "Change Password",
+            "logout": "Logout"
+        },
+        "label": {
+            "name": "Name",
+            "email": "Email"
+        },
+        "error": {
+            "name": "Loading...",
+            "email": "No email address provided yet!"
+        }
+    },
+    "address": {
+        "title": "Address",
+        "label": {
+            "name": "Name: ",
+            "mobile": "Mobile: ",
+            "division": "Division: ",
+            "city": "City: ",
+            "area": "Area: ",
+            "addressLine": "Address Line: ",
+            "label": "Label: ",
+            "make_default": "Make this your default address"
+        },
+        "button": {
+            "save": "Save",
+            "delete": "Delete"
+        },
+        "error": {
+            "name": "Provide a name",
+            "mobile": "Invalid mobile number!",
+            "addressLine": "Invalid address!",
+            "division": "Please select a division",
+            "city": "Please select a city",
+            "area": "Please select a area"
+        }
+    },
+    "address_book": {
+        "title": "Address Book"
+    }
+}
