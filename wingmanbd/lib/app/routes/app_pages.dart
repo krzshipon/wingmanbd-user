@@ -2,8 +2,6 @@ import 'package:get/get.dart';
 
 import '../modules/address/bindings/address_binding.dart';
 import '../modules/address/views/address_view.dart';
-import '../modules/address_book/bindings/address_book_binding.dart';
-import '../modules/address_book/views/address_book_view.dart';
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/auth_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
@@ -63,11 +61,6 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
-    ),
-    GetPage(
-      name: _Paths.ADDRESS_BOOK,
-      page: () => const AddressBookView(),
-      binding: AddressBookBinding(),
     ),
     GetPage(
       name: _Paths.ADDRESS,

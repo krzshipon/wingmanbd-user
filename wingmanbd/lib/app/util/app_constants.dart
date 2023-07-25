@@ -33,3 +33,6 @@ const kSelectionInstruction = 'Please Select';
 
 //Note Request
 const kNoteReqDateFormat = "HH:mm d MMM yy";
+
+//DateTime
+const firstEpoch = 0000000000000;

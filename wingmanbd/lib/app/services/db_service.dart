@@ -4,8 +4,6 @@ import 'package:realm/realm.dart';
 import 'package:super_ui_kit/super_ui_kit.dart';
 
 import '../data/data_keys.dart';
-import '../data/models/area.dart';
-import '../data/models/profile.dart';
 import 'auth_service.dart';
 
 class DbService extends GetxService {

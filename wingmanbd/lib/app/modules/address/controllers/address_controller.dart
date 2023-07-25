@@ -3,13 +3,10 @@ import 'package:super_ui_kit/super_ui_kit.dart';
 import 'package:wingmanbd/app/extensions/string_ext.dart';
 
 import '../../../data/models/area.dart';
-import '../../../data/models/profile.dart';
 import '../../../services/db_service.dart';
-import '../../address_book/controllers/address_book_controller.dart';
 
 class AddressController extends GetxController {
   final DbService dbService = Get.find<DbService>();
-  final AddressBookController _addressBookController = Get.find();
 
   final tcName = TextEditingController();
   final tcMobile = TextEditingController();
@@ -41,7 +38,6 @@ class AddressController extends GetxController {
   @override
   void onInit() {
     areaData.bindStream(bindAreaData());
-    pos.value = _addressBookController.selectedAddressPos.value;
     super.onInit();
     tcName.addListener(() {
       errorName.value = '';
@@ -96,7 +92,6 @@ class AddressController extends GetxController {
     validateFields();
     //Check if there is any validation error
     if (hasError.isTrue) return;
-    var pos = _addressBookController.selectedAddressPos.value;
     var address = Address(
         name: tcName.text,
         mobile: tcMobile.text,
@@ -252,7 +247,7 @@ class AddressController extends GetxController {
   }
 
   void bindAddress() {
-    var pos = _addressBookController.selectedAddressPos.value;
+    var pos = -1;
     if (pos > 0) {
       var address = dbService.profile.value!.addressBook[pos - 1];
       tcName.text = address.name;
