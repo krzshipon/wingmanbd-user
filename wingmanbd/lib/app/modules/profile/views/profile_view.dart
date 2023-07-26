@@ -25,7 +25,7 @@ class ProfileView extends GetView<ProfileController> {
           CSCard(
             children: [
               verticalSpaceSmall,
-              (controller.dbService.profile.value?.img.isEmpty ?? true)
+              (controller.dbService.profile.value?.imgSrc.isEmpty ?? true)
                   ? Align(
                       alignment: Alignment.topCenter,
                       child: CircleAvatar(
@@ -42,7 +42,7 @@ class ProfileView extends GetView<ProfileController> {
                         foregroundColor: Get.theme.colorScheme.secondary,
                         backgroundColor: Get.theme.colorScheme.secondary,
                         backgroundImage: NetworkImage(
-                            controller.dbService.profile.value!.img),
+                            controller.dbService.profile.value!.imgSrc),
                       ),
                     ),
               verticalSpaceTiny,

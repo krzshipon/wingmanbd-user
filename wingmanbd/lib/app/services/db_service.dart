@@ -4,9 +4,15 @@ import 'package:realm/realm.dart';
 import 'package:super_ui_kit/super_ui_kit.dart';
 
 import '../data/data_keys.dart';
+import '../data/models/schema.dart';
 import 'auth_service.dart';
 
 class DbService extends GetxService {
+  static const String profileSubName = 'profiles';
+  static const String areaDataSubName = 'areaData';
+  static const String donationSubName = 'donations';
+  static const String reviewSubName = 'reviews';
+
   final _authService = Get.find<AuthService>();
   GetStorage box = GetStorage();
   Realm? realm;
@@ -28,8 +34,14 @@ class DbService extends GetxService {
         user,
         [
           Profile.schema,
-          Address.schema,
           AreaData.schema,
+          Donation.schema,
+          Review.schema,
+          //Embedded
+          Location.schema,
+          Address.schema,
+          UserInfo.schema,
+          BasicUser.schema,
           Division.schema,
           City.schema,
           Area.schema
@@ -38,18 +50,30 @@ class DbService extends GetxService {
       realm = Realm(conf);
       // Check if the subscription already exists before adding
       final profileQuery = realm!.query<Profile>(r'userId == $0', [user.id]);
-      final profileSub = realm?.subscriptions.findByName('profile');
+      final profileSub = realm?.subscriptions.findByName(profileSubName);
 
       final areaDataQuery = realm!.all<AreaData>();
-      final areaDataSub = realm?.subscriptions.findByName('areaData');
+      final areaDataSub = realm?.subscriptions.findByName(areaDataSubName);
+
+      final donationQuery = realm!.all<Donation>();
+      final donationSub = realm?.subscriptions.findByName(donationSubName);
+
+      final reviewQuery = realm!.all<Review>();
+      final reviewSub = realm?.subscriptions.findByName(reviewSubName);
 
       //if (realm?.subscriptions.isEmpty ?? false) {
       //if (profileSub == null) {
       realm?.subscriptions.update((mutableSubscriptions) {
         mutableSubscriptions.clear();
         // server-side rules ensure user only downloads their own info
-        mutableSubscriptions.add(profileQuery, name: 'profile', update: true);
-        mutableSubscriptions.add(areaDataQuery, name: 'areaData', update: true);
+        mutableSubscriptions.add(profileQuery,
+            name: profileSubName, update: true);
+        mutableSubscriptions.add(areaDataQuery,
+            name: areaDataSubName, update: true);
+        mutableSubscriptions.add(donationQuery,
+            name: donationSubName, update: true);
+        mutableSubscriptions.add(reviewQuery,
+            name: reviewSubName, update: true);
       });
       await realm?.subscriptions.waitForSynchronization();
       //}

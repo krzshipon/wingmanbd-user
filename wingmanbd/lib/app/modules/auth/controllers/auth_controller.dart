@@ -129,10 +129,16 @@ class AuthController extends GetxController {
 
   updateProfile() async {
     final updatedCustomUserData = {
+      "orgId": '1',
+      "userId": _authService.currentUser.value?.id,
       "name": tcUserName.text,
       "mobile": tcUserMobile.text,
       "email": tcUserEmail.text,
-      "userId": _authService.currentUser.value?.id,
+      "imgSrc": "",
+      "bloodGroup": 'O+',
+      "availability": 'AVAILABLE',
+      "address": null,
+      "location": null
     };
 
     await _authService.currentUser.value?.functions

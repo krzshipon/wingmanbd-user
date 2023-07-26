@@ -1,6 +1,8 @@
 import 'package:realm/realm.dart';
-
 import '../../util/app_constants.dart';
+
+import 'dart:io';
+part 'schema.g.dart';
 
 //Types
 class UserRole {
@@ -49,14 +51,7 @@ class _Address {
 }
 
 @RealmModel(ObjectType.embeddedObject)
-class _SeekerInfo {
-  late String name;
-  late String mobile;
-  String altMobile = '';
-}
-
-@RealmModel(ObjectType.embeddedObject)
-class _DonorInfo {
+class _UserInfo {
   late String name;
   late String mobile;
   String altMobile = '';
@@ -81,14 +76,14 @@ class _Donation {
   String patientProblem = '';
   int amount = 1;
   DateTime neededAt = DateTime.now();
-  late _Address address;
+  _Address? address;
 
   late String seekerId;
-  late _SeekerInfo seekerInfo;
+  _UserInfo? seekerInfo;
   String seekerFeedback = '';
 
   String donorId = '';
-  _DonorInfo? donorInfo;
+  _UserInfo? donorInfo;
   String donorFeedback = '';
 
   String reqType = ReqType.PENDING;
@@ -101,11 +96,13 @@ class _Donation {
 
 //=====================Profile====================//
 
+@RealmModel()
 class _Profile {
   @PrimaryKey()
   @MapTo('_id')
   late ObjectId id;
-  String orgId = '';
+  late String orgId;
+  late String userId;
 
   String name = '';
   String mobile = '';
@@ -130,6 +127,7 @@ class _Profile {
   bool isVerified = false;
   bool isEmailVerified = false;
   bool isMobileVerified = false;
+  String adminFeedback = '';
 
   DateTime createdAt = DateTime.now();
   late DateTime updatedAt;
@@ -147,7 +145,7 @@ class _Review {
   String desc = '';
 
   late String toUserId;
-  late _BasicUser fromUser;
+  _BasicUser? fromUser;
 
   DateTime createdAt = DateTime.now();
   late DateTime updatedAt;
