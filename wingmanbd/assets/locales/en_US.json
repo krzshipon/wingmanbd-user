@@ -1,11 +1,11 @@
 {
     "app": {
-        "name": "WingMan",
+        "name": "WingMan BD",
         "under_development": "Under development",
         "coming_soon": "Coming soon..."
     },
     "auth": {
-        "welcome": "Welcome to WingMan!",
+        "welcome": "Welcome to WingMan BD!",
         "label": {
             "name": "Name",
             "mobile": "Mobile number",

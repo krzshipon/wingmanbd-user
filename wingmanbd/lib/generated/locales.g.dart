@@ -77,10 +77,10 @@ class LocaleKeys {
 
 class Locales {
   static const en_US = {
-    'app_name': 'Bagani',
+    'app_name': 'WingMan BD',
     'app_under_development': 'Under development',
     'app_coming_soon': 'Coming soon...',
-    'auth_welcome': 'Welcome to Bagani!',
+    'auth_welcome': 'Welcome to WingMan BD!',
     'auth_label_name': 'Name',
     'auth_label_mobile': 'Mobile number',
     'auth_label_email': 'Email (optional)',
@@ -102,7 +102,7 @@ class Locales {
     'auth_error_sign_in': 'Incorrect mobile number or password!',
     'auth_error_sign_up': 'Account already exist with this mobile',
     'dashboard_hello_user': 'Hello @name',
-    'dashboard_welcome_user': 'Welcome to Bagani!',
+    'dashboard_welcome_user': 'Welcome to WingMan!',
     'dashboard_total_plants': '@count plants',
     'setting_title': 'Settings',
     'setting_item_profile': 'Profile',
@@ -136,7 +136,7 @@ class Locales {
     'address_book_title': 'Address Book',
   };
   static const bn_BD = {
-    'app_name': 'বাগানী',
+    'app_name': 'WingMan BD',
     'app_under_development': 'Under development',
     'app_coming_soon': 'Coming soon...',
     'auth_welcome': 'বাগানীতে আপনাকে স্বাগতম!',
@@ -162,7 +162,7 @@ class Locales {
     'auth_error_sign_in': 'Incorrect mobile number or password!',
     'auth_error_sign_up': 'Account already exist with this mobile',
     'dashboard_hello_user': 'Hello @name',
-    'dashboard_welcome_user': 'Welcome to Bagani!',
+    'dashboard_welcome_user': 'Welcome to WingMan BD!',
     'dashboard_total_plants': '@count plants',
     'setting_title': 'Settings',
     'setting_item_profile': 'Profile',

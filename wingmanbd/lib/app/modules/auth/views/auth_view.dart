@@ -21,10 +21,11 @@ class AuthView extends GetView<AuthController> {
             alignment: Alignment.center,
             child: Image.asset(
               kAppIcon,
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
             ),
           ),
+          verticalSpaceTiny,
           Align(
             alignment: Alignment.center,
             child: CSText('auth_welcome'.tr),

@@ -673,8 +673,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
-      resolved-ref: "4d8fd10ba307abbdcb28d04413c80f300175e70b"
+      ref: dev
+      resolved-ref: "9cbeb80471736ee5ae461ed951039125d1974330"
       url: "https://github.com/krzshipon/super_ui_kit.git"
     source: git
     version: "0.0.1"
