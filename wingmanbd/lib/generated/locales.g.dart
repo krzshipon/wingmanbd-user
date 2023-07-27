@@ -42,7 +42,7 @@ class LocaleKeys {
   static const auth_error_sign_up = 'auth_error_sign_up';
   static const dashboard_hello_user = 'dashboard_hello_user';
   static const dashboard_welcome_user = 'dashboard_welcome_user';
-  static const dashboard_total_plants = 'dashboard_total_plants';
+  static const dashboard_total_items = 'dashboard_total_items';
   static const setting_title = 'setting_title';
   static const setting_item_profile = 'setting_item_profile';
   static const setting_item_version = 'setting_item_version';
@@ -103,7 +103,7 @@ class Locales {
     'auth_error_sign_up': 'Account already exist with this mobile',
     'dashboard_hello_user': 'Hello @name',
     'dashboard_welcome_user': 'Welcome to WingMan!',
-    'dashboard_total_plants': '@count plants',
+    'dashboard_total_items': '@count donations',
     'setting_title': 'Settings',
     'setting_item_profile': 'Profile',
     'setting_item_version': 'Version',
@@ -163,7 +163,7 @@ class Locales {
     'auth_error_sign_up': 'Account already exist with this mobile',
     'dashboard_hello_user': 'Hello @name',
     'dashboard_welcome_user': 'Welcome to WingMan BD!',
-    'dashboard_total_plants': '@count plants',
+    'dashboard_total_items': '@count donations',
     'setting_title': 'Settings',
     'setting_item_profile': 'Profile',
     'setting_item_version': 'Version',

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:super_ui_kit/super_ui_kit.dart';
+import 'package:wingmanbd/app/theme/light_theme.dart';
 import 'app/data/asset_keys.dart';
 import 'app/routes/app_pages.dart';
 import 'app/services/auth_service.dart';
@@ -37,7 +38,7 @@ Future<void> main() async {
           ? AppPages.INITIAL
           : Routes.HOME,
       getPages: AppPages.routes,
-      theme: appLightTheme,
+      theme: appThemeL,
       darkTheme: appDarkTheme,
       enableLog: true,
       //initialBinding: BindingsBuilder(() => initServices()),

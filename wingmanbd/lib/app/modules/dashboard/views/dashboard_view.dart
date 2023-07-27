@@ -47,7 +47,7 @@ class DashboardView extends GetView<DashboardController> {
                         Align(
                           alignment: Alignment.center,
                           child: CSText.title(
-                            'dashboard_total_plants'
+                            'dashboard_total_items'
                                 .trParams({'count': '500+'}),
                           ),
                         ),

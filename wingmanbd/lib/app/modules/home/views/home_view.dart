@@ -26,7 +26,7 @@ class HomeView extends GetView<HomeController> {
           borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
           child: WaterDropNavBar(
             bottomPadding: GetPlatform.isAndroid ? 8 : null,
-            backgroundColor: Get.theme.colorScheme.primary,
+            backgroundColor: Get.theme.colorScheme.secondary,
             waterDropColor: kcWaterDropColor,
             onItemSelected: (int index) {
               try {
@@ -45,11 +45,11 @@ class HomeView extends GetView<HomeController> {
                   filledIcon: Icons.dashboard_rounded,
                   outlinedIcon: Icons.dashboard_outlined),
               BarItem(
-                  filledIcon: Icons.swap_horizontal_circle_sharp,
-                  outlinedIcon: Icons.swap_horizontal_circle_outlined),
+                  filledIcon: Icons.water_drop_sharp,
+                  outlinedIcon: Icons.water_drop_outlined),
               BarItem(
-                  filledIcon: Icons.store_mall_directory_sharp,
-                  outlinedIcon: Icons.store_mall_directory_outlined),
+                  filledIcon: Icons.notification_important_sharp,
+                  outlinedIcon: Icons.notification_important_outlined),
               BarItem(
                 filledIcon: Icons.settings,
                 outlinedIcon: Icons.settings_outlined,

@@ -40,7 +40,7 @@
     "dashboard": {
         "hello_user": "Hello @name",
         "welcome_user": "Welcome to WingMan BD!",
-        "total_plants": "@count plants"
+        "total_items": "@count donations"
     },
     "setting": {
         "title": "Settings",
