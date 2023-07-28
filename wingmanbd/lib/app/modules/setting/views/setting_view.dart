@@ -25,27 +25,27 @@ class SettingView extends GetView<SettingController> {
             title: 'setting_item_profile'.tr,
             iconData: Icons.account_circle_sharp,
           ),
-          // CsSettingItem(
-          //   ontap: () {
-          //     controller.gotoLicense();
-          //   },
-          //   title: 'license'.tr,
-          //   iconData: Icons.book_sharp,
-          // ),
-          // CsSettingItem(
-          //   ontap: () => controller.openFeedbackView(),
-          //   title: 'feedback'.tr,
-          //   iconData: Icons.feedback_sharp,
-          // ),
-          // verticalSpaceMedium,
-          // CsSettingItem(
-          //   ontap: () {
-          //     controller.gotoLanguageSetting();
-          //   },
-          //   header: 'lang'.tr,
-          //   title: controller.currentLang?.value?.name?? Get.locale?.languageCode ?? "English",
-          //   iconData: Icons.language_sharp,
-          // ),
+          CsSettingItem(
+            onTap: () {
+              controller.gotoLicense();
+            },
+            title: 'license'.tr,
+            iconData: Icons.book_sharp,
+          ),
+          CsSettingItem(
+            onTap: () => controller.openFeedbackView(),
+            title: 'feedback'.tr,
+            iconData: Icons.feedback_sharp,
+          ),
+          verticalSpaceMedium,
+          CsSettingItem(
+            onTap: () {
+              controller.gotoLanguageSetting();
+            },
+            header: 'lang'.tr,
+            title: controller.currentLang?.value?.name?? Get.locale?.languageCode ?? "English",
+            iconData: Icons.language_sharp,
+          ),
           verticalSpaceMedium,
           Obx(
             () => CsSettingItem(

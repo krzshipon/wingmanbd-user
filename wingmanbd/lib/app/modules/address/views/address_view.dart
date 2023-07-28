@@ -8,7 +8,7 @@ class AddressView extends GetView<AddressController> {
   const AddressView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Center();
+    return const Center();
     // return CSHomeWidget(
     //   floatingActionButton: Padding(
     //     padding: const EdgeInsets.only(left: 30),

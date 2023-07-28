@@ -90,8 +90,5 @@
             "city": "Please select a city",
             "area": "Please select a area"
         }
-    },
-    "address_book": {
-        "title": "Address Book"
     }
 }

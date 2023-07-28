@@ -1,7 +1,6 @@
 import 'package:realm/realm.dart';
 import '../../util/app_constants.dart';
 
-import 'dart:io';
 part 'schema.g.dart';
 
 //Types

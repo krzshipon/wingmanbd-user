@@ -10,6 +10,8 @@ import '../modules/exchange/bindings/exchange_binding.dart';
 import '../modules/exchange/views/exchange_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/language/bindings/language_binding.dart';
+import '../modules/language/views/language_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/setting/bindings/setting_binding.dart';
@@ -66,6 +68,11 @@ class AppPages {
       name: _Paths.ADDRESS,
       page: () => const AddressView(),
       binding: AddressBinding(),
+    ),
+    GetPage(
+      name: _Paths.LANGUAGE,
+      page: () => const LanguageView(),
+      binding: LanguageBinding(),
     ),
   ];
 }
