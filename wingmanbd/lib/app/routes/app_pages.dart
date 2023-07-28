@@ -8,10 +8,14 @@ import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/exchange/bindings/exchange_binding.dart';
 import '../modules/exchange/views/exchange_view.dart';
+import '../modules/feedback/bindings/feedback_binding.dart';
+import '../modules/feedback/views/feedback_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/language/bindings/language_binding.dart';
 import '../modules/language/views/language_view.dart';
+import '../modules/license/bindings/license_binding.dart';
+import '../modules/license/views/license_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/setting/bindings/setting_binding.dart';
@@ -73,6 +77,16 @@ class AppPages {
       name: _Paths.LANGUAGE,
       page: () => const LanguageView(),
       binding: LanguageBinding(),
+    ),
+    GetPage(
+      name: _Paths.FEEDBACK,
+      page: () => const FeedbackView(),
+      binding: FeedbackBinding(),
+    ),
+    GetPage(
+      name: _Paths.LICENSE,
+      page: () => const LicenseView(),
+      binding: LicenseBinding(),
     ),
   ];
 }

@@ -183,3 +183,18 @@ class _AreaData {
   DateTime createdAt = DateTime.now();
   late DateTime updatedAt;
 }
+
+// =================FeedBack============
+@RealmModel()
+class _Feedback {
+  @PrimaryKey()
+  @MapTo('_id')
+  late ObjectId id;
+  late String orgId;
+  late String userId;
+
+  String feedback = '';
+
+  DateTime createdAt = DateTime.now();
+  late DateTime updatedAt;
+}

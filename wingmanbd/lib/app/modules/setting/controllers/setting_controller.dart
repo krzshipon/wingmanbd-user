@@ -4,6 +4,8 @@ import 'package:wingmanbd/app/extensions/string_ext.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../../services/auth_service.dart';
+import '../../feedback/controllers/feedback_controller.dart';
+import '../../feedback/views/feedback_view.dart';
 
 class SettingController extends GetxController {
   final AuthService _authService = Get.find<AuthService>();
@@ -32,9 +34,16 @@ class SettingController extends GetxController {
     appVersion.value = version;
   }
 
-  void gotoLicense() {}
+  void gotoLicense() {
+    Get.toNamed(Routes.LICENSE);
+  }
 
-  openFeedbackView() {}
+  openFeedbackView() {
+    Get.lazyPut<FeedbackController>(
+      () => FeedbackController(),
+    );
+    Get.bottomSheet(FeedbackView());
+  }
 
   void gotoLanguageSetting() {
     Get.toNamed(Routes.LANGUAGE);

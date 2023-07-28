@@ -15,6 +15,8 @@ abstract class Routes {
   static const ADDRESS_BOOK = _Paths.ADDRESS_BOOK;
   static const ADDRESS = _Paths.ADDRESS;
   static const LANGUAGE = _Paths.LANGUAGE;
+  static const FEEDBACK = _Paths.FEEDBACK;
+  static const LICENSE = _Paths.LICENSE;
 }
 
 abstract class _Paths {
@@ -29,4 +31,6 @@ abstract class _Paths {
   static const ADDRESS_BOOK = '/address-book';
   static const ADDRESS = '/address';
   static const LANGUAGE = '/language';
+  static const FEEDBACK = '/feedback';
+  static const LICENSE = '/license';
 }

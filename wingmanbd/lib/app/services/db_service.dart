@@ -12,6 +12,7 @@ class DbService extends GetxService {
   static const String areaDataSubName = 'areaData';
   static const String donationSubName = 'donations';
   static const String reviewSubName = 'reviews';
+  static const String feedbackSubName = 'feedbacks';
 
   final _authService = Get.find<AuthService>();
   GetStorage box = GetStorage();
@@ -37,6 +38,7 @@ class DbService extends GetxService {
           AreaData.schema,
           Donation.schema,
           Review.schema,
+          Feedback.schema,
           //Embedded
           Location.schema,
           Address.schema,
@@ -60,6 +62,9 @@ class DbService extends GetxService {
 
       final reviewQuery = realm!.all<Review>();
       final reviewSub = realm?.subscriptions.findByName(reviewSubName);
+      
+      final feedbackQuery = realm!.all<Feedback>();
+      final feedbackSub = realm?.subscriptions.findByName(feedbackSubName);
 
       //if (realm?.subscriptions.isEmpty ?? false) {
       //if (profileSub == null) {
@@ -74,6 +79,8 @@ class DbService extends GetxService {
             name: donationSubName, update: true);
         mutableSubscriptions.add(reviewQuery,
             name: reviewSubName, update: true);
+        mutableSubscriptions.add(feedbackQuery,
+            name: feedbackSubName, update: true);
       });
       await realm?.subscriptions.waitForSynchronization();
       //}

@@ -284,7 +284,7 @@ class Donation extends _Donation
     String bloodGroup = '',
     String patientProblem = '',
     int amount = 1,
-    required neededAt,
+    required DateTime neededAt,
     Address? address,
     UserInfo? seekerInfo,
     String seekerFeedback = '',
@@ -507,6 +507,7 @@ class Profile extends _Profile with RealmEntity, RealmObjectBase, RealmObject {
     bool isVerified = false,
     bool isEmailVerified = false,
     bool isMobileVerified = false,
+    String adminFeedback = '',
     Iterable<Review> recentReviews = const [],
     Iterable<Donation> recentDonations = const [],
     Iterable<Donation> recentDonationRequests = const [],
@@ -528,6 +529,7 @@ class Profile extends _Profile with RealmEntity, RealmObjectBase, RealmObject {
         'isVerified': false,
         'isEmailVerified': false,
         'isMobileVerified': false,
+        'adminFeedback': '',
         'createdAt': DateTime.now(),
       });
     }
@@ -551,6 +553,7 @@ class Profile extends _Profile with RealmEntity, RealmObjectBase, RealmObject {
     RealmObjectBase.set(this, 'isVerified', isVerified);
     RealmObjectBase.set(this, 'isEmailVerified', isEmailVerified);
     RealmObjectBase.set(this, 'isMobileVerified', isMobileVerified);
+    RealmObjectBase.set(this, 'adminFeedback', adminFeedback);
     RealmObjectBase.set(this, 'createdAt', createdAt);
     RealmObjectBase.set(this, 'updatedAt', updatedAt);
     RealmObjectBase.set<RealmList<Review>>(
@@ -705,6 +708,13 @@ class Profile extends _Profile with RealmEntity, RealmObjectBase, RealmObject {
       RealmObjectBase.set(this, 'isMobileVerified', value);
 
   @override
+  String get adminFeedback =>
+      RealmObjectBase.get<String>(this, 'adminFeedback') as String;
+  @override
+  set adminFeedback(String value) =>
+      RealmObjectBase.set(this, 'adminFeedback', value);
+
+  @override
   DateTime get createdAt =>
       RealmObjectBase.get<DateTime>(this, 'createdAt') as DateTime;
   @override
@@ -759,6 +769,7 @@ class Profile extends _Profile with RealmEntity, RealmObjectBase, RealmObject {
       SchemaProperty('isVerified', RealmPropertyType.bool),
       SchemaProperty('isEmailVerified', RealmPropertyType.bool),
       SchemaProperty('isMobileVerified', RealmPropertyType.bool),
+      SchemaProperty('adminFeedback', RealmPropertyType.string),
       SchemaProperty('createdAt', RealmPropertyType.timestamp),
       SchemaProperty('updatedAt', RealmPropertyType.timestamp),
     ]);
@@ -1103,6 +1114,91 @@ class AreaData extends _AreaData
           mapTo: '_id', primaryKey: true),
       SchemaProperty('divisions', RealmPropertyType.object,
           linkTarget: 'Division', collectionType: RealmCollectionType.list),
+      SchemaProperty('createdAt', RealmPropertyType.timestamp),
+      SchemaProperty('updatedAt', RealmPropertyType.timestamp),
+    ]);
+  }
+}
+
+class Feedback extends _Feedback
+    with RealmEntity, RealmObjectBase, RealmObject {
+  static var _defaultsSet = false;
+
+  Feedback(
+    ObjectId id,
+    String orgId,
+    String userId,
+    DateTime updatedAt, {
+    String feedback = '',
+  }) {
+    if (!_defaultsSet) {
+      _defaultsSet = RealmObjectBase.setDefaults<Feedback>({
+        'feedback': '',
+        'createdAt': DateTime.now(),
+      });
+    }
+    RealmObjectBase.set(this, '_id', id);
+    RealmObjectBase.set(this, 'orgId', orgId);
+    RealmObjectBase.set(this, 'userId', userId);
+    RealmObjectBase.set(this, 'feedback', feedback);
+    RealmObjectBase.set(this, 'createdAt', createdAt);
+    RealmObjectBase.set(this, 'updatedAt', updatedAt);
+  }
+
+  Feedback._();
+
+  @override
+  ObjectId get id => RealmObjectBase.get<ObjectId>(this, '_id') as ObjectId;
+  @override
+  set id(ObjectId value) => RealmObjectBase.set(this, '_id', value);
+
+  @override
+  String get orgId => RealmObjectBase.get<String>(this, 'orgId') as String;
+  @override
+  set orgId(String value) => RealmObjectBase.set(this, 'orgId', value);
+
+  @override
+  String get userId => RealmObjectBase.get<String>(this, 'userId') as String;
+  @override
+  set userId(String value) => RealmObjectBase.set(this, 'userId', value);
+
+  @override
+  String get feedback =>
+      RealmObjectBase.get<String>(this, 'feedback') as String;
+  @override
+  set feedback(String value) => RealmObjectBase.set(this, 'feedback', value);
+
+  @override
+  DateTime get createdAt =>
+      RealmObjectBase.get<DateTime>(this, 'createdAt') as DateTime;
+  @override
+  set createdAt(DateTime value) =>
+      RealmObjectBase.set(this, 'createdAt', value);
+
+  @override
+  DateTime get updatedAt =>
+      RealmObjectBase.get<DateTime>(this, 'updatedAt') as DateTime;
+  @override
+  set updatedAt(DateTime value) =>
+      RealmObjectBase.set(this, 'updatedAt', value);
+
+  @override
+  Stream<RealmObjectChanges<Feedback>> get changes =>
+      RealmObjectBase.getChanges<Feedback>(this);
+
+  @override
+  Feedback freeze() => RealmObjectBase.freezeObject<Feedback>(this);
+
+  static SchemaObject get schema => _schema ??= _initSchema();
+  static SchemaObject? _schema;
+  static SchemaObject _initSchema() {
+    RealmObjectBase.registerFactory(Feedback._);
+    return const SchemaObject(ObjectType.realmObject, Feedback, 'Feedback', [
+      SchemaProperty('id', RealmPropertyType.objectid,
+          mapTo: '_id', primaryKey: true),
+      SchemaProperty('orgId', RealmPropertyType.string),
+      SchemaProperty('userId', RealmPropertyType.string),
+      SchemaProperty('feedback', RealmPropertyType.string),
       SchemaProperty('createdAt', RealmPropertyType.timestamp),
       SchemaProperty('updatedAt', RealmPropertyType.timestamp),
     ]);
