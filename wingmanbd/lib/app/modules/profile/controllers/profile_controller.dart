@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:super_ui_kit/super_ui_kit.dart';
+import 'package:wingmanbd/app/data/models/schema.dart';
 import 'package:wingmanbd/app/extensions/string_ext.dart';
 
 import '../../../routes/app_pages.dart';
@@ -59,10 +60,6 @@ class ProfileController extends GetxController {
     editModeActive.toggle();
   }
 
-  gotoAddressBook() {
-    Get.toNamed(Routes.ADDRESS_BOOK);
-  }
-
   logOut() async {
     Get.showLoader();
     await _authService.logOutUser();
@@ -109,5 +106,13 @@ class ProfileController extends GetxController {
       hasError.value = true;
       errorEmail.value = 'auth_error_email'.tr;
     }
+  }
+
+  void onAvailabilityChange(bool value) {
+    dbService.realm?.write(() {
+      dbService.profile.value?.availability =
+          value ? Availability.AVAILABLE : Availability.UNAVAILABLE;
+      dbService.profile.refresh();
+    });
   }
 }

@@ -6,6 +6,10 @@ import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/auth_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
+import '../modules/donation/bindings/donation_binding.dart';
+import '../modules/donation/views/donation_view.dart';
+import '../modules/donation_history/bindings/donation_history_binding.dart';
+import '../modules/donation_history/views/donation_history_view.dart';
 import '../modules/exchange/bindings/exchange_binding.dart';
 import '../modules/exchange/views/exchange_view.dart';
 import '../modules/feedback/bindings/feedback_binding.dart';
@@ -87,6 +91,16 @@ class AppPages {
       name: _Paths.LICENSE,
       page: () => const LicenseView(),
       binding: LicenseBinding(),
+    ),
+    GetPage(
+      name: _Paths.DONATION,
+      page: () => const DonationView(),
+      binding: DonationBinding(),
+    ),
+    GetPage(
+      name: _Paths.DONATION_HISTORY,
+      page: () => const DonationHistoryView(),
+      binding: DonationHistoryBinding(),
     ),
   ];
 }

@@ -45,6 +45,7 @@ class LocaleKeys {
   static const dashboard_total_items = 'dashboard_total_items';
   static const setting_title = 'setting_title';
   static const setting_item_profile = 'setting_item_profile';
+  static const setting_item_donation_history = 'setting_item_donation_history';
   static const setting_item_version = 'setting_item_version';
   static const profile_title = 'profile_title';
   static const profile_item_address_book = 'profile_item_address_book';
@@ -72,7 +73,7 @@ class LocaleKeys {
   static const address_error_division = 'address_error_division';
   static const address_error_city = 'address_error_city';
   static const address_error_area = 'address_error_area';
-  static const address_book_title = 'address_book_title';
+  static const donation_history_title = 'donation_history_title';
 }
 
 class Locales {
@@ -106,6 +107,7 @@ class Locales {
     'dashboard_total_items': '@count donations',
     'setting_title': 'Settings',
     'setting_item_profile': 'Profile',
+    'setting_item_donation_history': 'Your Donations',
     'setting_item_version': 'Version',
     'profile_title': 'Profile',
     'profile_item_address_book': 'Address Book',
@@ -133,7 +135,7 @@ class Locales {
     'address_error_division': 'Please select a division',
     'address_error_city': 'Please select a city',
     'address_error_area': 'Please select a area',
-    'address_book_title': 'Address Book',
+    'donation_history_title': 'Past Donations',
   };
   static const bn_BD = {
     'app_name': 'WingMan BD',
@@ -166,6 +168,7 @@ class Locales {
     'dashboard_total_items': '@count donations',
     'setting_title': 'Settings',
     'setting_item_profile': 'Profile',
+    'setting_item_donation_history': 'Your Donations',
     'setting_item_version': 'Version',
     'profile_title': 'Profile',
     'profile_item_address_book': 'Address Book',
@@ -193,6 +196,6 @@ class Locales {
     'address_error_division': 'Please select a division',
     'address_error_city': 'Please select a city',
     'address_error_area': 'Please select a area',
-    'address_book_title': 'Address Book',
+    'donation_history_title': 'Past Donations',
   };
 }

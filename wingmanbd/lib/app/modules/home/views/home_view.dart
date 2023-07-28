@@ -17,10 +17,10 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return CSHomeWidget(
-      // floatingActionButton: CSIconButton(
-      //   icon: Icons.add_sharp,
-      //   ontap: () => ,
-      // ),
+      floatingActionButton: CSIconButton(
+        icon: Icons.add_sharp,
+        onTap: () {},
+      ),
       bottomNavigationBar: Obx(
         () => ClipRRect(
           borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),

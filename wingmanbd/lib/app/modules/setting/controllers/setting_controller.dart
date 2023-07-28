@@ -48,4 +48,8 @@ class SettingController extends GetxController {
   void gotoLanguageSetting() {
     Get.toNamed(Routes.LANGUAGE);
   }
+
+  void gotoDonationHistory() {
+    Get.toNamed(Routes.DONATION_HISTORY);
+  }
 }

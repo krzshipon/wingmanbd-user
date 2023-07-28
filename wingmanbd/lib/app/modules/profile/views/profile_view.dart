@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:super_ui_kit/super_ui_kit.dart';
+import 'package:wingmanbd/app/data/models/schema.dart';
 
 import '../../../data/asset_keys.dart';
 import '../controllers/profile_controller.dart';
@@ -9,12 +10,14 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return CSHomeWidget(
-      floatingActionButton: Obx(() => CSIconButton(
-            icon: controller.editModeActive.value
-                ? Icons.check_sharp
-                : Icons.edit_sharp,
-            onTap: () => controller.onEditButtonTap(),
-          )),
+      floatingActionButton: Obx(
+        () => CSIconButton(
+          icon: controller.editModeActive.value
+              ? Icons.check_sharp
+              : Icons.edit_sharp,
+          onTap: () => controller.onEditButtonTap(),
+        ),
+      ),
       padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
       child: Column(
         children: [
@@ -90,17 +93,54 @@ class ProfileView extends GetView<ProfileController> {
                   ],
                 ),
               ),
+              verticalSpaceTiny,
+              Obx(
+                () => Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Transform.scale(
+                      scale: 0.8,
+                      child: Switch(
+                        thumbIcon: MaterialStateProperty.resolveWith<Icon?>(
+                            (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.selected)) {
+                            return const Icon(Icons.check);
+                          }
+                          return const Icon(Icons.close);
+                        }),
+                        activeColor: Colors.green,
+                        value:
+                            controller.dbService.profile.value?.availability ==
+                                Availability.AVAILABLE,
+                        onChanged: (value) =>
+                            controller.onAvailabilityChange(value),
+                      ),
+                    ),
+                    // const CsIcon(
+                    //   Icons.check_circle_sharp,
+                    //   color: Colors.green,
+                    // ),
+                    CSText(
+                      (controller.dbService.profile.value?.availability ==
+                              Availability.AVAILABLE)
+                          ? 'READY TO DONATE'
+                          : 'NOT READY YET',
+                      color:
+                          (controller.dbService.profile.value?.availability ==
+                                  Availability.AVAILABLE)
+                              ? Colors.green
+                              : Colors.grey,
+                    ),
+                    horizontalSpaceRegular
+                  ],
+                ),
+              ),
             ],
           ),
           verticalSpaceLarge,
           Expanded(
             child: ListView(
               children: [
-                ProfileItem(
-                  iconData: Icons.library_books_sharp,
-                  title: 'profile_item_address_book'.tr,
-                  onTap: () => controller.gotoAddressBook(),
-                ),
                 ProfileItem(
                   iconData: Icons.call_end_sharp,
                   title: 'profile_item_change_mobile'.tr,

@@ -27,6 +27,13 @@ class SettingView extends GetView<SettingController> {
           ),
           CsSettingItem(
             onTap: () {
+              controller.gotoDonationHistory();
+            },
+            title: 'setting_item_donation_history'.tr,
+            iconData: Icons.history_toggle_off_sharp,
+          ),
+          CsSettingItem(
+            onTap: () {
               controller.gotoLicense();
             },
             title: 'license'.tr,

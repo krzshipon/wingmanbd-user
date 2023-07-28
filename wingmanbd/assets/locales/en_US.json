@@ -46,6 +46,7 @@
         "title": "Settings",
         "item": {
             "profile": "Profile",
+            "donation_history": "Your Donations",
             "version": "Version"
         }
     },
@@ -90,5 +91,8 @@
             "city": "Please select a city",
             "area": "Please select a area"
         }
+    },
+    "donation_history": {
+        "title": "Past Donations"
     }
 }
