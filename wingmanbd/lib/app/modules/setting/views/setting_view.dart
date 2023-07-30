@@ -34,14 +34,21 @@ class SettingView extends GetView<SettingController> {
           ),
           CsSettingItem(
             onTap: () {
+              controller.gotoDonationRequestHistory();
+            },
+            title: 'setting_item_donation_request_history'.tr,
+            iconData: Icons.history_toggle_off_sharp,
+          ),
+          CsSettingItem(
+            onTap: () {
               controller.gotoLicense();
             },
-            title: 'license'.tr,
+            title: 'setting_item_license'.tr,
             iconData: Icons.book_sharp,
           ),
           CsSettingItem(
             onTap: () => controller.openFeedbackView(),
-            title: 'feedback'.tr,
+            title: 'setting_item_feedback'.tr,
             iconData: Icons.feedback_sharp,
           ),
           verticalSpaceMedium,
@@ -49,8 +56,10 @@ class SettingView extends GetView<SettingController> {
             onTap: () {
               controller.gotoLanguageSetting();
             },
-            header: 'lang'.tr,
-            title: controller.currentLang?.value?.name?? Get.locale?.languageCode ?? "English",
+            header: 'setting_item_lang'.tr,
+            title: controller.currentLang?.value?.name ??
+                Get.locale?.languageCode ??
+                "English",
             iconData: Icons.language_sharp,
           ),
           verticalSpaceMedium,

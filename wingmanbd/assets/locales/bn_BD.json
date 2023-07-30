@@ -47,6 +47,10 @@
         "item": {
             "profile": "Profile",
             "donation_history": "Your Donations",
+            "donation_request_history": "Your Requests",
+            "license": "App Licenses",
+            "feedback": "Give Feedback",
+            "language": "App Language",
             "version": "Version"
         }
     },

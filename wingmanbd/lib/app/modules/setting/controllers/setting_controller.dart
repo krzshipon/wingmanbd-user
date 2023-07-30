@@ -52,4 +52,8 @@ class SettingController extends GetxController {
   void gotoDonationHistory() {
     Get.toNamed(Routes.DONATION_HISTORY);
   }
+
+  void gotoDonationRequestHistory() {
+    Get.toNamed(Routes.DONATION_HISTORY);
+  }
 }
