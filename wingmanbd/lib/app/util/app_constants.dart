@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 //App
-const orgId = "64c355f4393e7f8cd1798375";
+const kOrgId = "64c355f4393e7f8cd1798375";
 
 ///Locales
 const kDefaultLocale = Locale('en', 'US');
@@ -24,7 +24,8 @@ const kCurrentSelectedSubKey = "kCurrentSelectedSubKey";
 const kCurrentSelectedLessonKey = "kCurrentSelectedLessonKey";
 //Note
 const kCurrentSelectedNoteKey = "kCurrentSelectedNoteKey";
-const kNoteDateFormat = 'dd-MM-yyyy';
+const kDateFormat = 'dd-MM-yyyy';
+const kDonationDateFormat = 'dd-MM-yyyy hh:mm a';
 const kLastUpdatedNoteTimestamp = "kLastUpdatedNoteTimestamp";
 
 //Lanaguage

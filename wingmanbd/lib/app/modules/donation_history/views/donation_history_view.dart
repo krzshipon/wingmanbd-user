@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:super_ui_kit/super_ui_kit.dart';
+import 'package:wingmanbd/app/modules/donation_history/views/donation_item.dart';
 import '../controllers/donation_history_controller.dart';
 
 class DonationHistoryView extends GetView<DonationHistoryController> {
@@ -22,10 +23,23 @@ class DonationHistoryView extends GetView<DonationHistoryController> {
             title: 'donation_history_title'.tr,
           ),
           verticalSpaceSmall,
-          const Expanded(
-              child: Center(
-            child: CSText('You have no donation yet!'),
-          ))
+          Expanded(
+            child: Obx(
+              () => LiveList.options(
+                shrinkWrap: true,
+                physics: const ClampingScrollPhysics(),
+                itemBuilder: animationItemBuilder(
+                  (index) => DonationItem(
+                    controller.donations[index],
+                    onTap: () => controller.viewDonationDetail(index),
+                  ),
+                ),
+                itemCount:
+                    controller.donations.length,
+                options: kAnimationOptions,
+              ),
+            ),
+          ),
         ],
       ),
     );

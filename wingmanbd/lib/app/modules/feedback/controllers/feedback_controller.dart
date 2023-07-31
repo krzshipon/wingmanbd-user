@@ -25,7 +25,7 @@ class FeedbackController extends GetxController {
           () => _dbService.realm?.add<app_feedback.Feedback>(
             app_feedback.Feedback(
               ObjectId(),
-              orgId,
+              kOrgId,
               _authService.currentUser.value?.id ?? '',
               DateTime.now(),
               feedback: msg,

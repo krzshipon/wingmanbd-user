@@ -97,6 +97,16 @@
         }
     },
     "donation_history": {
-        "title": "Past Donations"
+        "title": "Past Donations",
+        "item": {
+            "label":{
+                "seeker_name": "Patient:",
+                "problem": "Problem:",
+                "quantity": "Quantity:",
+                "address": "Address:",
+                "group": "Blood Group:",
+                "type": "Type:"
+            }
+        }
     }
 }

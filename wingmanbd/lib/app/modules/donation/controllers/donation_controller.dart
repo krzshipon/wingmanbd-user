@@ -1,9 +1,8 @@
 import 'package:get/get.dart';
 
 class DonationController extends GetxController {
-  //TODO: Implement DonationController
 
-  final count = 0.obs;
+  final editMode = false.obs;
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +18,6 @@ class DonationController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+
+  saveDonationData() {}
 }

@@ -7,3 +7,4 @@ const kProfileImage = 'assets/img/profile.png';
 
 ///Animations
 const kaDashboardFeaturedAnim = 'assets/animations/dashboard_featured.json';
+const kaConnectionAnim = 'assets/animations/connection.json';
