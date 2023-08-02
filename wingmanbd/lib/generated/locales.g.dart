@@ -91,6 +91,21 @@ class LocaleKeys {
       'donation_history_item_label_group';
   static const donation_history_item_label_type =
       'donation_history_item_label_type';
+  static const donation_title = 'donation_title';
+  static const donation_label_user_info_seeker =
+      'donation_label_user_info_seeker';
+  static const donation_label_user_info_donor =
+      'donation_label_user_info_donor';
+  static const donation_label_user_name = 'donation_label_user_name';
+  static const donation_label_user_mobile = 'donation_label_user_mobile';
+  static const donation_label_user_mobile_alt =
+      'donation_label_user_mobile_alt';
+  static const donation_label_details = 'donation_label_details';
+  static const donation_label_group = 'donation_label_group';
+  static const donation_label_type = 'donation_label_type';
+  static const donation_label_quantity = 'donation_label_quantity';
+  static const donation_label_problem = 'donation_label_problem';
+  static const donation_label_address_line = 'donation_label_address_line';
 }
 
 class Locales {
@@ -163,6 +178,18 @@ class Locales {
     'donation_history_item_label_address': 'Address:',
     'donation_history_item_label_group': 'Blood Group:',
     'donation_history_item_label_type': 'Type:',
+    'donation_title': 'Donation',
+    'donation_label_user_info_seeker': 'Seeker Info:',
+    'donation_label_user_info_donor': 'Donor Info:',
+    'donation_label_user_name': 'Name:',
+    'donation_label_user_mobile': 'Mobile:',
+    'donation_label_user_mobile_alt': 'Alt Mobile:',
+    'donation_label_details': 'Details:',
+    'donation_label_group': 'Group:',
+    'donation_label_type': 'Type:',
+    'donation_label_quantity': 'Quantity:',
+    'donation_label_problem': 'Patient Problem:',
+    'donation_label_address_line': 'AddressLine:',
   };
   static const bn_BD = {
     'app_name': 'WingMan BD',
@@ -234,5 +261,17 @@ class Locales {
     'donation_history_item_label_address': 'Address:',
     'donation_history_item_label_group': 'Blood Group:',
     'donation_history_item_label_type': 'Type:',
+    'donation_title': 'Donation',
+    'donation_label_user_info_seeker': 'Seeker Info:',
+    'donation_label_user_info_donor': 'Donor Info:',
+    'donation_label_user_name': 'Name:',
+    'donation_label_user_mobile': 'Mobile:',
+    'donation_label_user_mobile_alt': 'Alt Mobile:',
+    'donation_label_details': 'Details:',
+    'donation_label_group': 'Group:',
+    'donation_label_type': 'Type:',
+    'donation_label_quantity': 'Quantity:',
+    'donation_label_problem': 'Patient Problem:',
+    'donation_label_address_line': 'AddressLine:',
   };
 }

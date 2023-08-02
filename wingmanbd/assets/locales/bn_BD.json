@@ -99,7 +99,7 @@
     "donation_history": {
         "title": "Past Donations",
         "item": {
-            "label":{
+            "label": {
                 "seeker_name": "Patient:",
                 "problem": "Problem:",
                 "quantity": "Quantity:",
@@ -107,6 +107,26 @@
                 "group": "Blood Group:",
                 "type": "Type:"
             }
+        }
+    },
+    "donation": {
+        "title": "Donation",
+        "label": {
+            "user": {
+                "info": {
+                    "seeker": "Seeker Info:",
+                    "donor": "Donor Info:"
+                },
+                "name": "Name:",
+                "mobile": "Mobile:",
+                "mobile_alt": "Alt Mobile:"
+            },
+            "details": "Details:",
+            "group": "Group:",
+            "type": "Type:",
+            "quantity": "Quantity:",
+            "problem": "Patient Problem:",
+            "address_line": "AddressLine:"
         }
     }
 }
