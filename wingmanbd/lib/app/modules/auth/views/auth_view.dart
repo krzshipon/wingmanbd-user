@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:super_ui_kit/super_ui_kit.dart';
+
 
 import '../../../data/asset_keys.dart';
 import '../controllers/auth_controller.dart';
@@ -121,7 +121,7 @@ class AuthView extends GetView<AuthController> {
           Align(
             alignment: Alignment.center,
             child: Obx(
-              () => CSToupleText(
+              () => CSTupleText(
                 text1: controller.authType.value == AuthType.SIGNIN
                     ? 'auth_instruction_sign_up_part1'.tr
                     : 'auth_instruction_sign_in_part1'.tr,
