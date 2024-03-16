@@ -17,7 +17,6 @@ class LocaleKeys {
   static const auth_welcome = 'auth_welcome';
   static const auth_label_name = 'auth_label_name';
   static const auth_label_mobile = 'auth_label_mobile';
-  static const auth_label_email = 'auth_label_email';
   static const auth_label_password = 'auth_label_password';
   static const auth_label_confirm_password = 'auth_label_confirm_password';
   static const auth_button_sign_in = 'auth_button_sign_in';
@@ -32,7 +31,6 @@ class LocaleKeys {
       'auth_instruction_sign_in_part2';
   static const auth_error_name = 'auth_error_name';
   static const auth_error_mobile = 'auth_error_mobile';
-  static const auth_error_email = 'auth_error_email';
   static const auth_error_password_length = 'auth_error_password_length';
   static const auth_error_password_not_matched =
       'auth_error_password_not_matched';
@@ -40,6 +38,15 @@ class LocaleKeys {
   static const auth_error_no_account = 'auth_error_no_account';
   static const auth_error_sign_in = 'auth_error_sign_in';
   static const auth_error_sign_up = 'auth_error_sign_up';
+  static const otp_title = 'otp_title';
+  static const otp_message = 'otp_message';
+  static const otp_status_sending = 'otp_status_sending';
+  static const otp_status_sent = 'otp_status_sent';
+  static const otp_label_enter_otp = 'otp_label_enter_otp';
+  static const otp_button_continue = 'otp_button_continue';
+  static const otp_error_invalid_number = 'otp_error_invalid_number';
+  static const otp_error_limit_exceeds = 'otp_error_limit_exceeds';
+  static const otp_error_unknown = 'otp_error_unknown';
   static const dashboard_hello_user = 'dashboard_hello_user';
   static const dashboard_welcome_user = 'dashboard_welcome_user';
   static const dashboard_total_items = 'dashboard_total_items';
@@ -116,7 +123,6 @@ class Locales {
     'auth_welcome': 'Welcome to WingMan BD!',
     'auth_label_name': 'Name',
     'auth_label_mobile': 'Mobile number',
-    'auth_label_email': 'Email (optional)',
     'auth_label_password': 'Password',
     'auth_label_confirm_password': 'Confirm password',
     'auth_button_sign_in': 'Sign in',
@@ -127,13 +133,22 @@ class Locales {
     'auth_instruction_sign_in_part2': 'Sign in',
     'auth_error_name': 'Tell us your name!',
     'auth_error_mobile': 'Invalid mobile number!',
-    'auth_error_email': 'Invalid email!',
     'auth_error_password_length': 'Minimum length is 8!',
     'auth_error_password_not_matched': 'Password not matched!',
     'auth_error_password_wrong': 'Wrong password!',
     'auth_error_no_account': 'No account found with this mobile number!',
     'auth_error_sign_in': 'Incorrect mobile number or password!',
     'auth_error_sign_up': 'Account already exist with this mobile',
+    'otp_title': 'Verify OTP',
+    'otp_message': 'Your verification code is @code',
+    'otp_status_sending': 'Sending an OTP to @mobile',
+    'otp_status_sent': 'OTP has been sent to @mobile',
+    'otp_label_enter_otp': 'Enter 4 Digit OTP',
+    'otp_button_continue': 'CONTINUE',
+    'otp_error_invalid_number': 'Invalid number @mobile! Please check again.',
+    'otp_error_limit_exceeds':
+        'Maximum limit exceeds! Please try again after @time',
+    'otp_error_unknown': 'Something went wrong! Try again...',
     'dashboard_hello_user': 'Hello @name',
     'dashboard_welcome_user': 'Welcome to WingMan!',
     'dashboard_total_items': '@count donations',
@@ -198,7 +213,6 @@ class Locales {
     'auth_welcome': 'বাগানীতে আপনাকে স্বাগতম!',
     'auth_label_name': 'নাম',
     'auth_label_mobile': 'মোবাইল নং',
-    'auth_label_email': 'ইমেইল (optional)',
     'auth_label_password': 'পাসওয়ার্ড',
     'auth_label_confirm_password': 'Confirm password',
     'auth_button_sign_in': 'সাইন ইন',
@@ -209,7 +223,6 @@ class Locales {
     'auth_instruction_sign_in_part2': 'সাইন ইন করুন',
     'auth_error_name': 'নাম দিন!',
     'auth_error_mobile': 'অবৈধ মোবাইল নম্বর!',
-    'auth_error_email': 'অবৈধ ইমেইল!',
     'auth_error_password_length': 'সর্বনিম্ন দৈর্ঘ্য ৮!',
     'auth_error_password_not_matched': 'পাসওয়ার্ড মিলেনি!',
     'auth_error_password_wrong': 'ভুল পাসওয়ার্ড!',
@@ -217,6 +230,16 @@ class Locales {
         'এই মোবাইল নম্বরের সাথে কোনও অ্যাকাউন্ট পাওয়া যায় নি!',
     'auth_error_sign_in': 'Incorrect mobile number or password!',
     'auth_error_sign_up': 'Account already exist with this mobile',
+    'otp_title': 'Verify OTP',
+    'otp_message': 'Your verification code is @code',
+    'otp_status_sending': 'Sending an OTP to @mobile',
+    'otp_status_sent': 'OTP has been sent to @mobile',
+    'otp_label_enter_otp': 'Enter 4 Digit OTP',
+    'otp_button_continue': 'CONTINUE',
+    'otp_error_invalid_number': 'Invalid number @mobile! Please check again.',
+    'otp_error_limit_exceeds':
+        'Maximum limit exceeds! Please try again after @time',
+    'otp_error_unknown': 'Something went wrong! Try again...',
     'dashboard_hello_user': 'Hello @name',
     'dashboard_welcome_user': 'Welcome to WingMan BD!',
     'dashboard_total_items': '@count donations',

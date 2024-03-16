@@ -111,12 +111,14 @@ class AuthController extends GetxController {
         try {
           await _authService.registerUserEmailPw(
               tcUserMobile.text, tcUserPass.text);
-          if (_authService.currentUser.value != null) {
-            updateProfile();
-          } else {
-            Get.hideLoader();
-            authType.value = AuthType.SIGNIN;
-          }
+          Get.hideLoader();
+          Get.toNamed(Routes.OTP);
+
+          // if (_authService.currentUser.value != null) {
+          //   updateProfile();
+          // } else {
+          //   authType.value = AuthType.SIGNIN;
+          // }
         } catch (err) {
           Get.hideLoader();
           error.value = 'auth_error_sign_up'.tr;
@@ -128,6 +130,7 @@ class AuthController extends GetxController {
   }
 
   updateProfile() async {
+    Get.showLoader();
     final updatedCustomUserData = {
       "orgId": '1',
       "userId": _authService.currentUser.value?.id,
@@ -145,10 +148,9 @@ class AuthController extends GetxController {
         .call(kfUpdateUserProfile, [updatedCustomUserData]).then((value) {
       _authService.refreshUserData().then((value) {
         Get.hideLoader();
-        Get.offNamed(Routes.HOME);
+        Get.offAllNamed(Routes.HOME);
       }).catchError((e) {
         Get.hideLoader();
-        Get.offNamed(Routes.HOME);
       });
     }).catchError(
       (e) {

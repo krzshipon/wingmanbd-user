@@ -9,7 +9,6 @@
         "label": {
             "name": "Name",
             "mobile": "Mobile number",
-            "email": "Email (optional)",
             "password": "Password",
             "confirm_password": "Confirm password"
         },
@@ -26,7 +25,6 @@
         "error": {
             "name": "Tell us your name!",
             "mobile": "Invalid mobile number!",
-            "email": "Invalid email!",
             "password": {
                 "length": "Minimum length is 8!",
                 "not_matched": "Password not matched!",
@@ -35,6 +33,25 @@
             "no_account": "No account found with this mobile number!",
             "sign_in": "Incorrect mobile number or password!",
             "sign_up": "Account already exist with this mobile"
+        }
+    },
+    "otp": {
+        "title": "Verify OTP",
+        "message": "Your verification code is @code",
+        "status": {
+            "sending": "Sending an OTP to @mobile",
+            "sent": "OTP has been sent to @mobile"
+        },
+        "label": {
+            "enter_otp": "Enter 4 Digit OTP"
+        },
+        "button": {
+            "continue": "CONTINUE"
+        },
+        "error": {
+            "invalid_number": "Invalid number @mobile! Please check again.",
+            "limit_exceeds": "Maximum limit exceeds! Please try again after @time",
+            "unknown": "Something went wrong! Try again..."
         }
     },
     "dashboard": {

@@ -20,6 +20,8 @@ import '../modules/language/bindings/language_binding.dart';
 import '../modules/language/views/language_view.dart';
 import '../modules/license/bindings/license_binding.dart';
 import '../modules/license/views/license_view.dart';
+import '../modules/otp/bindings/otp_binding.dart';
+import '../modules/otp/views/otp_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/setting/bindings/setting_binding.dart';
@@ -101,6 +103,11 @@ class AppPages {
       name: _Paths.DONATION_HISTORY,
       page: () => const DonationHistoryView(),
       binding: DonationHistoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.OTP,
+      page: () => const OtpView(),
+      binding: OtpBinding(),
     ),
   ];
 }

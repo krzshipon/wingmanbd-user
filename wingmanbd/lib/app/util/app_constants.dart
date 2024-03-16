@@ -28,7 +28,7 @@ const kDateFormat = 'dd-MM-yyyy';
 const kDonationDateFormat = 'dd-MM-yyyy hh:mm a';
 const kLastUpdatedNoteTimestamp = "kLastUpdatedNoteTimestamp";
 
-//Lanaguage
+//Language
 const kCurrentLangCode = "kCurrentLangCode";
 
 //Selector
@@ -40,3 +40,18 @@ const kNoteReqDateFormat = "HH:mm d MMM yy";
 
 //DateTime
 const firstEpoch = 0000000000000;
+
+//Otp
+// Define the range of digits for the OTP (0 to 9)
+const kOtpMinRange = 1000; // Minimum value (inclusive)
+const kOtpMaxRange = 9999; // Maximum value (inclusive)
+const kOtpRetryIntervalSeconds = 30; //3m
+const kOtpResetIntervalSeconds = 3 * 60; //30m
+const kOtpMaxRetryCount = 3;
+
+const kOtpResponseCodeSuccess = 202;
+const kOtpResponseCodeInvalidNumber = 1001;
+
+const kLastOtpSentTimeKey = 'kLastOtpSentTime';
+const kOtpTryCountKey = 'kOtpTryCount';
+const kLastSentOtpKey = 'kLastSentOtp';
