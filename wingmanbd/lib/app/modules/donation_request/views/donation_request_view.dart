@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:super_ui_kit/super_ui_kit.dart';
 
@@ -23,10 +24,32 @@ class DonationRequestView extends GetView<DonationRequestController> {
           Expanded(
             child: ListView(
               children: [
+                CSText("donation_request_item_label_type".tr),
+                Row(
+                  children: [
+                    CsCheckbox(
+                      true,
+                      (value) {},
+                      title: "BLOOD",
+                    ),
+                    CsCheckbox(
+                      false,
+                      (value) {},
+                      title: "PLATELETS",
+                    ),
+                  ],
+                ),
+                CSDropDown(
+                  ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'],
+                  header: "donation_request_item_label_group".tr,
+                  onValueChange: (p0) => {},
+                  value: 'A+',
+                ),
+                verticalSpaceRegular,
                 Obx(
                   () => CSInputField(
-                    controller: controller.tcAmount,
-                    placeholder: 'donation_request_label_amount'.tr,
+                    controller: TextEditingController(),
+                    placeholder: 'donation_request_item_label_quantity'.tr,
                     inputType: TextInputType.number,
                     errorText: controller.errorAmount.isNotEmpty
                         ? controller.errorAmount.value
@@ -36,9 +59,9 @@ class DonationRequestView extends GetView<DonationRequestController> {
                 verticalSpaceRegular,
                 Obx(
                   () => CSInputField(
-                    controller: controller.tcAmount,
-                    placeholder: 'donation_request_label_amount'.tr,
-                    inputType: TextInputType.number,
+                    controller: TextEditingController(),
+                    placeholder: 'donation_request_item_label_name'.tr,
+                    inputType: TextInputType.name,
                     errorText: controller.errorAmount.isNotEmpty
                         ? controller.errorAmount.value
                         : null,
@@ -47,9 +70,9 @@ class DonationRequestView extends GetView<DonationRequestController> {
                 verticalSpaceRegular,
                 Obx(
                   () => CSInputField(
-                    controller: controller.tcAmount,
-                    placeholder: 'donation_request_label_amount'.tr,
-                    inputType: TextInputType.number,
+                    controller: TextEditingController(),
+                    placeholder: 'donation_request_item_label_contact'.tr,
+                    inputType: TextInputType.phone,
                     errorText: controller.errorAmount.isNotEmpty
                         ? controller.errorAmount.value
                         : null,
@@ -58,9 +81,9 @@ class DonationRequestView extends GetView<DonationRequestController> {
                 verticalSpaceRegular,
                 Obx(
                   () => CSInputField(
-                    controller: controller.tcAmount,
-                    placeholder: 'donation_request_label_amount'.tr,
-                    inputType: TextInputType.number,
+                    controller: TextEditingController(),
+                    placeholder: 'donation_request_item_label_problem'.tr,
+                    inputType: TextInputType.text,
                     errorText: controller.errorAmount.isNotEmpty
                         ? controller.errorAmount.value
                         : null,
@@ -69,15 +92,52 @@ class DonationRequestView extends GetView<DonationRequestController> {
                 verticalSpaceRegular,
                 Obx(
                   () => CSInputField(
-                    controller: controller.tcAmount,
-                    placeholder: 'donation_request_label_amount'.tr,
-                    inputType: TextInputType.number,
+                    controller: TextEditingController(),
+                    placeholder: 'donation_request_item_label_hospital'.tr,
+                    inputType: TextInputType.text,
                     errorText: controller.errorAmount.isNotEmpty
                         ? controller.errorAmount.value
                         : null,
                   ),
                 ),
                 verticalSpaceRegular,
+                Obx(
+                  () => CSInputField(
+                    controller: TextEditingController(),
+                    placeholder: 'donation_request_item_label_bed'.tr,
+                    inputType: TextInputType.text,
+                    errorText: controller.errorAmount.isNotEmpty
+                        ? controller.errorAmount.value
+                        : null,
+                  ),
+                ),
+                verticalSpaceRegular,
+                Obx(
+                  () => CSInputField(
+                    controller: TextEditingController(text: "23 March"),
+                    placeholder: 'Date for Donation:'.tr,
+                    inputType: TextInputType.datetime,
+                    errorText: controller.errorAmount.isNotEmpty
+                        ? controller.errorAmount.value
+                        : null,
+                  ),
+                ),
+                verticalSpaceRegular,
+                Obx(
+                  () => CSInputField(
+                    controller: TextEditingController(text: '12:00pm'),
+                    placeholder: 'donation_request_item_label_time'.tr,
+                    inputType: TextInputType.datetime,
+                    errorText: controller.errorAmount.isNotEmpty
+                        ? controller.errorAmount.value
+                        : null,
+                  ),
+                ),
+                CsCheckbox(
+                  true,
+                  (value) {},
+                  title: 'donation_request_item_label_is_critical'.tr,
+                ),
               ],
             ),
           ),

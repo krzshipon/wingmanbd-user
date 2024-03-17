@@ -19,6 +19,7 @@ class LocaleKeys {
   static const auth_label_mobile = 'auth_label_mobile';
   static const auth_label_password = 'auth_label_password';
   static const auth_label_confirm_password = 'auth_label_confirm_password';
+  static const auth_label_group = 'auth_label_group';
   static const auth_button_sign_in = 'auth_button_sign_in';
   static const auth_button_sign_up = 'auth_button_sign_up';
   static const auth_instruction_sign_up_part1 =
@@ -38,6 +39,7 @@ class LocaleKeys {
   static const auth_error_no_account = 'auth_error_no_account';
   static const auth_error_sign_in = 'auth_error_sign_in';
   static const auth_error_sign_up = 'auth_error_sign_up';
+  static const auth_error_group = 'auth_error_group';
   static const otp_title = 'otp_title';
   static const otp_message = 'otp_message';
   static const otp_status_sending = 'otp_status_sending';
@@ -113,6 +115,27 @@ class LocaleKeys {
   static const donation_label_quantity = 'donation_label_quantity';
   static const donation_label_problem = 'donation_label_problem';
   static const donation_label_address_line = 'donation_label_address_line';
+  static const donation_request_title = 'donation_request_title';
+  static const donation_request_item_label_type =
+      'donation_request_item_label_type';
+  static const donation_request_item_label_group =
+      'donation_request_item_label_group';
+  static const donation_request_item_label_quantity =
+      'donation_request_item_label_quantity';
+  static const donation_request_item_label_problem =
+      'donation_request_item_label_problem';
+  static const donation_request_item_label_is_critical =
+      'donation_request_item_label_is_critical';
+  static const donation_request_item_label_name =
+      'donation_request_item_label_name';
+  static const donation_request_item_label_hospital =
+      'donation_request_item_label_hospital';
+  static const donation_request_item_label_bed =
+      'donation_request_item_label_bed';
+  static const donation_request_item_label_contact =
+      'donation_request_item_label_contact';
+  static const donation_request_item_label_time =
+      'donation_request_item_label_time';
 }
 
 class Locales {
@@ -125,6 +148,7 @@ class Locales {
     'auth_label_mobile': 'Mobile number',
     'auth_label_password': 'Password',
     'auth_label_confirm_password': 'Confirm password',
+    'auth_label_group': 'Blood Group:',
     'auth_button_sign_in': 'Sign in',
     'auth_button_sign_up': 'Sign up',
     'auth_instruction_sign_up_part1': 'Not joined yet?',
@@ -139,6 +163,7 @@ class Locales {
     'auth_error_no_account': 'No account found with this mobile number!',
     'auth_error_sign_in': 'Incorrect mobile number or password!',
     'auth_error_sign_up': 'Account already exist with this mobile',
+    'auth_error_group': 'You must select your blood group',
     'otp_title': 'Verify OTP',
     'otp_message': 'Your verification code is @code',
     'otp_status_sending': 'Sending an OTP to @mobile',
@@ -205,6 +230,17 @@ class Locales {
     'donation_label_quantity': 'Quantity:',
     'donation_label_problem': 'Patient Problem:',
     'donation_label_address_line': 'AddressLine:',
+    'donation_request_title': 'Request Blood',
+    'donation_request_item_label_type': 'Request Type:',
+    'donation_request_item_label_group': 'Blood Group:',
+    'donation_request_item_label_quantity': 'Blood Units Required:',
+    'donation_request_item_label_problem': 'Patient Problem:',
+    'donation_request_item_label_is_critical': 'Is Critical?',
+    'donation_request_item_label_name': 'Patient Name:',
+    'donation_request_item_label_hospital': 'Hospital Name:',
+    'donation_request_item_label_bed': 'Ward & Bed Number:',
+    'donation_request_item_label_contact': 'Contact Number:',
+    'donation_request_item_label_time': 'Time for Donation:',
   };
   static const bn_BD = {
     'app_name': 'WingMan BD',
@@ -215,6 +251,7 @@ class Locales {
     'auth_label_mobile': 'মোবাইল নং',
     'auth_label_password': 'পাসওয়ার্ড',
     'auth_label_confirm_password': 'Confirm password',
+    'auth_label_group': 'Blood Group:',
     'auth_button_sign_in': 'সাইন ইন',
     'auth_button_sign_up': 'সাইন আপ',
     'auth_instruction_sign_up_part1': 'এখনও যোগদান করেননি?',
@@ -230,6 +267,7 @@ class Locales {
         'এই মোবাইল নম্বরের সাথে কোনও অ্যাকাউন্ট পাওয়া যায় নি!',
     'auth_error_sign_in': 'Incorrect mobile number or password!',
     'auth_error_sign_up': 'Account already exist with this mobile',
+    'auth_error_group': 'You must select your blood group',
     'otp_title': 'Verify OTP',
     'otp_message': 'Your verification code is @code',
     'otp_status_sending': 'Sending an OTP to @mobile',
@@ -296,5 +334,16 @@ class Locales {
     'donation_label_quantity': 'Quantity:',
     'donation_label_problem': 'Patient Problem:',
     'donation_label_address_line': 'AddressLine:',
+    'donation_request_title': 'Request Blood',
+    'donation_request_item_label_type': 'Request Type:',
+    'donation_request_item_label_group': 'Blood Group:',
+    'donation_request_item_label_quantity': 'Blood Units Required:',
+    'donation_request_item_label_problem': 'Patient Problem:',
+    'donation_request_item_label_is_critical': 'Is Critical?',
+    'donation_request_item_label_name': 'Patient Name:',
+    'donation_request_item_label_hospital': 'Hospital Name:',
+    'donation_request_item_label_bed': 'Ward & Bed Number:',
+    'donation_request_item_label_contact': 'Contact Number:',
+    'donation_request_item_label_time': 'Time for Donation:',
   };
 }

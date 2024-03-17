@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:super_ui_kit/super_ui_kit.dart';
-
+import 'package:wingmanbd/app/util/app_constants.dart';
 
 import '../../../data/asset_keys.dart';
 import '../controllers/auth_controller.dart';
@@ -96,15 +96,11 @@ class AuthView extends GetView<AuthController> {
           ),
           Obx(
             () => controller.authType.value == AuthType.SIGNUP
-                ? CSInputField(
-                    controller: controller.tcUserEmail,
-                    placeholder: 'auth_label_email'.tr,
-                    inputType: TextInputType.emailAddress,
-                    errorText: controller.errorEmail.isNotEmpty
-                        ? controller.errorEmail.value
-                        : controller.error.isNotEmpty
-                            ? controller.error.value
-                            : null,
+                ? CSDropDown(
+                    [...kBloodGroups],
+                    header: "auth_label_group".tr,
+                    onValueChange: (value) => controller.updateGroup(value),
+                    error: controller.errorGroup.value,
                   )
                 : emptyWidget,
           ),

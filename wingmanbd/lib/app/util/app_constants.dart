@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 //App
 const kOrgId = "64c355f4393e7f8cd1798375";
+const kBloodGroups = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
 
 ///Locales
 const kDefaultLocale = Locale('en', 'US');

@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:wingmanbd/app/modules/donation_request/bindings/donation_request_binding.dart';
+import 'package:wingmanbd/app/modules/donation_request/views/donation_request_view.dart';
 
 import '../modules/address/bindings/address_binding.dart';
 import '../modules/address/views/address_view.dart';
@@ -103,6 +105,11 @@ class AppPages {
       name: _Paths.DONATION_HISTORY,
       page: () => const DonationHistoryView(),
       binding: DonationHistoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.DONATION_REQUEST,
+      page: () => const DonationRequestView(),
+      binding: DonationRequestBinding(),
     ),
     GetPage(
       name: _Paths.OTP,

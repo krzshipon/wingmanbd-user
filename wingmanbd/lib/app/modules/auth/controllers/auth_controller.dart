@@ -20,6 +20,8 @@ class AuthController extends GetxController {
   TextEditingController tcUserConfirmPass = TextEditingController();
   TextEditingController tcUserEmail = TextEditingController();
 
+  final userBloodGroup = ''.obs;
+
   final authType = AuthType.SIGNIN.obs;
 
   final errorName = ''.obs;
@@ -27,6 +29,7 @@ class AuthController extends GetxController {
   final errorPass = ''.obs;
   final errorConfirmPass = ''.obs;
   final errorEmail = ''.obs;
+  final errorGroup = ''.obs;
   final error = ''.obs;
 
   final hasError = false.obs;
@@ -138,7 +141,7 @@ class AuthController extends GetxController {
       "mobile": tcUserMobile.text,
       "email": tcUserEmail.text,
       "imgSrc": "",
-      "bloodGroup": 'O+',
+      "bloodGroup": userBloodGroup.value,
       "availability": 'AVAILABLE',
       "address": null,
       "location": null
@@ -184,6 +187,7 @@ class AuthController extends GetxController {
     errorPass.value = '';
     errorConfirmPass.value = '';
     errorEmail.value = '';
+    errorGroup.value = '';
     hasError.value = false;
   }
 
@@ -219,6 +223,12 @@ class AuthController extends GetxController {
       hasError.value = true;
       errorEmail.value = 'auth_error_email'.tr;
     }
+    //Blood Group
+    if (userBloodGroup.isEmpty ||
+        !kBloodGroups.contains(userBloodGroup.value)) {
+      hasError.value = true;
+      errorGroup.value = 'auth_error_group'.tr;
+    }
   }
 
   void clearPassword() {
@@ -228,5 +238,13 @@ class AuthController extends GetxController {
 
   void clearMobile() {
     tcUserMobile.clear();
+  }
+
+  updateGroup(String? value) {
+    printInfo(info: 'updateGroup ▶ value: $value');
+    if (value != null && kBloodGroups.contains(value)) {
+      errorGroup.value = '';
+      userBloodGroup.value = value;
+    }
   }
 }

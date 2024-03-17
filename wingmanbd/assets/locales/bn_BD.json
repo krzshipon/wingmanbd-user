@@ -10,7 +10,8 @@
             "name": "নাম",
             "mobile": "মোবাইল নং",
             "password": "পাসওয়ার্ড",
-            "confirm_password": "Confirm password"
+            "confirm_password": "Confirm password",
+            "group": "Blood Group:"
         },
         "button": {
             "sign_in": "সাইন ইন",
@@ -32,7 +33,8 @@
             },
             "no_account": "এই মোবাইল নম্বরের সাথে কোনও অ্যাকাউন্ট পাওয়া যায় নি!",
             "sign_in": "Incorrect mobile number or password!",
-            "sign_up": "Account already exist with this mobile"
+            "sign_up": "Account already exist with this mobile",
+            "group": "You must select your blood group"
         }
     },
     "otp": {
@@ -144,6 +146,23 @@
             "quantity": "Quantity:",
             "problem": "Patient Problem:",
             "address_line": "AddressLine:"
+        }
+    },
+    "donation_request": {
+        "title": "Request Blood",
+        "item": {
+            "label": {
+                "type": "Request Type:",
+                "group": "Blood Group:",
+                "quantity": "Blood Units Required:",
+                "problem": "Patient Problem:",
+                "is_critical": "Is Critical?",
+                "name": "Patient Name:",
+                "hospital": "Hospital Name:",
+                "bed": "Ward & Bed Number:",
+                "contact": "Contact Number:",
+                "time": "Time for Donation:"
+            }
         }
     }
 }

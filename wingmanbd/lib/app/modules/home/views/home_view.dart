@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:super_ui_kit/super_ui_kit.dart';
 import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
+import 'package:wingmanbd/app/routes/app_pages.dart';
 
 import '../../../util/app_theme.dart';
 import '../../dashboard/views/dashboard_view.dart';
@@ -19,7 +20,7 @@ class HomeView extends GetView<HomeController> {
     return CSHomeWidget(
       floatingActionButton: CSIconButton(
         icon: Icons.add_sharp,
-        onTap: () {},
+        onTap: () => Get.toNamed(Routes.DONATION_REQUEST),
       ),
       bottomNavigationBar: Obx(
         () => ClipRRect(

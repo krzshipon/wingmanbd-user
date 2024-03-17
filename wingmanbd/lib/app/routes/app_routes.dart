@@ -18,6 +18,7 @@ abstract class Routes {
   static const LICENSE = _Paths.LICENSE;
   static const DONATION = _Paths.DONATION;
   static const DONATION_HISTORY = _Paths.DONATION_HISTORY;
+  static const DONATION_REQUEST = _Paths.DONATION_REQUEST;
   static const OTP = _Paths.OTP;
 }
 
@@ -36,5 +37,6 @@ abstract class _Paths {
   static const LICENSE = '/license';
   static const DONATION = '/donation';
   static const DONATION_HISTORY = '/donation-history';
+  static const DONATION_REQUEST = '/donation-request';
   static const OTP = '/otp';
 }
