@@ -4,13 +4,14 @@ import 'dart:math';
 import 'package:flutter/widgets.dart';
 import 'package:super_ui_kit/super_ui_kit.dart';
 import 'package:wingmanbd/app/modules/auth/controllers/auth_controller.dart';
+import 'package:wingmanbd/app/routes/app_pages.dart';
 import 'package:wingmanbd/app/util/app_constants.dart';
 
 import '../providers/otp_response_provider.dart';
 
 class OtpController extends GetxController {
-  final GetStorage _box = GetStorage();
-  final OtpResponseProvider _otpResponseProvider = OtpResponseProvider();
+  final _box = GetStorage();
+  final _otpResponseProvider = OtpResponseProvider();
   final _authController = Get.find<AuthController>();
 
   //Controllers
@@ -32,18 +33,15 @@ class OtpController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    printInfo(info: "onInit ▶▶ syncOtpStatus");
+    bindListeners();
     syncOtpStatus();
   }
 
   @override
   void onReady() {
     super.onReady();
-    printInfo(info: "onInit ▶▶ sendOtp");
+    printInfo(info: "onInit >>> sendOtp");
     sendOtp();
-    tcOtpController.addListener(() {
-      isValidOtp.value = tcOtpController.text.length == 4;
-    });
   }
 
   @override
@@ -52,37 +50,68 @@ class OtpController extends GetxController {
     super.onClose();
   }
 
+  void bindListeners() {
+    tcOtpController.addListener(() {
+      isValidOtp.value = tcOtpController.text.length == 4;
+    });
+  }
+
+  void syncOtpStatus() {
+    printInfo(info: "syncOtpStatus >->");
+    //check for last otp try count
+    int? otpRetryCount = _box.read(kOtpTryCountKey);
+    printInfo(info: "syncOtpStatus => otpRetryCount: $otpRetryCount");
+    if (otpRetryCount != null) _otpTryCount.value = otpRetryCount;
+
+    //check for last otp sent time
+    int? lastOtpSentTimeStamp = _box.read(kLastOtpSentTimeKey);
+    printInfo(
+        info: "syncOtpStatus => lastOtpSentTimeStamp: $lastOtpSentTimeStamp");
+    if (lastOtpSentTimeStamp != null) {
+      DateTime lastSentTime =
+          DateTime.fromMillisecondsSinceEpoch(lastOtpSentTimeStamp);
+      Duration timeDiff = DateTime.now().difference(lastSentTime);
+      printInfo(info: "syncOtpStatus => timeDiff: $timeDiff");
+      _otpRemainingSeconds.value = max(
+          0,
+          ((_otpTryCount <= kOtpMaxRetryCount)
+                  ? kOtpRetryIntervalSeconds
+                  : kOtpResetIntervalSeconds) -
+              timeDiff.inSeconds);
+    }
+    printInfo(
+        info:
+            "syncOtpStatus => _otpRemainingSeconds: ${_otpRemainingSeconds.value}");
+    printInfo(info: "syncOtpStatus <-<");
+  }
+
   Future<void> sendOtp() async {
     printInfo(
         info:
-            "sendOtp ▶▶ _otpTryCount: ${_otpTryCount.value} _otpRemainingSeconds: ${_otpRemainingSeconds.value}");
+            "sendOtp >-> _otpTryCount: ${_otpTryCount.value} _otpRemainingSeconds: ${_otpRemainingSeconds.value}");
     if (_otpTryCount < 3) {
       if (_otpRemainingSeconds <= 0) {
-        try {
-          Get.showLoader();
-          // Call the getOtpResponse method from the provider
-          printInfo(info: "sendOtp ▶ getOtpResponse ⫸");
-          _otp.value = generateOTP();
-          final response = await _otpResponseProvider.getOtpResponse(
-            'otp_message'.trParams(
-              {
-                'code': _otp.value,
-              },
-            ),
-            _authController.tcUserMobile.text,
-          );
+        Get.showLoader();
+        // Call the getOtpResponse method from the provider
+        _otp.value = generateOTP();
+        printInfo(info: "sendOtp => getOtpResponse -> otp: ${_otp.value}");
+        await _otpResponseProvider
+            .getOtpResponse(
+          'otp_message'.trParams({'code': _otp.value}),
+          _authController.tcUserMobile.text,
+        )
+            .then((response) {
           printInfo(
-              info: "sendOtp ▶ getOtpResponse ⫷ ${response?.responseCode}");
-
+              info:
+                  "sendOtp => getOtpResponse -> Success => Response Code: ${response?.responseCode}");
           //Hide loader first
           Get.hideLoader();
 
           // Handle the response as needed
           if (response != null) {
             // Do something with the response
-            printInfo(info: 'OTP response received: ${response.responseCode}');
             if (response.responseCode == kOtpResponseCodeSuccess) {
-              printInfo(info: "sendOtp ▶ getOtpResponse ▶ OK[✔] ▶ OTP Sent");
+              printInfo(info: "sendOtp => getOtpResponse -> OTP Sent");
               _otpTryCount.value++;
               _otpRemainingSeconds.value = kOtpRetryIntervalSeconds;
               _box.write(kLastSentOtpKey, _otp.value);
@@ -96,7 +125,7 @@ class OtpController extends GetxController {
             } else if (response.responseCode == kOtpResponseCodeInvalidNumber) {
               printError(
                   info:
-                      "sendOtp ▶ getOtpResponse ▶ Failed to send OTP[✘]: Invalid Number");
+                      "sendOtp => getOtpResponse -> Failed to send OTP[✘]: Invalid Number");
               otpStatus.value = "otp_error_invalid_number".trParams({
                 'mobile': _authController.tcUserMobile.text,
               });
@@ -134,7 +163,7 @@ class OtpController extends GetxController {
               onConfirm: () => Get.back(),
             );
           }
-        } catch (error) {
+        }).onError((error, stackTrace) {
           // Handle errors
           printError(
               info: "sendOtp ▶ getOtpResponse ▶ Failed to send OTP[✘]: $error");
@@ -146,7 +175,7 @@ class OtpController extends GetxController {
             dialogType: DialogType.error,
             onConfirm: () => Get.back(),
           );
-        }
+        });
       } else {
         printInfo(info: "sendOtp ▶ Already sent: _startTimer()");
         _startTimer();
@@ -212,39 +241,10 @@ class OtpController extends GetxController {
     }
 
     if (tcOtpController.text == _otp.value) {
-      _authController.updateProfile();
+      Get.offAllNamed(Routes.HOME);
     } else {
       otpStatus.value = "otp_error_not_matched".tr;
     }
-  }
-
-  void syncOtpStatus() {
-    printInfo(info: "syncOtpStatus ▶▶");
-    //check for last otp try count
-    int? otpRetryCount = _box.read(kOtpTryCountKey);
-    printInfo(info: "syncOtpStatus ▶ otpRetryCount: $otpRetryCount");
-    if (otpRetryCount != null) _otpTryCount.value = otpRetryCount;
-
-    //check for last otp sent time
-    int? lastOtpSentTimeStamp = _box.read(kLastOtpSentTimeKey);
-    printInfo(
-        info: "syncOtpStatus ▶ lastOtpSentTimeStamp: $lastOtpSentTimeStamp");
-    if (lastOtpSentTimeStamp != null) {
-      DateTime lastSentTime =
-          DateTime.fromMillisecondsSinceEpoch(lastOtpSentTimeStamp);
-      Duration timeDiff = DateTime.now().difference(lastSentTime);
-      printInfo(info: "syncOtpStatus ▶ timeDiff: $timeDiff");
-      _otpRemainingSeconds.value = max(
-          0,
-          ((_otpTryCount <= kOtpMaxRetryCount)
-                  ? kOtpRetryIntervalSeconds
-                  : kOtpResetIntervalSeconds) -
-              timeDiff.inSeconds);
-    }
-    printInfo(
-        info:
-            "syncOtpStatus ▶ _otpRemainingSeconds: ${_otpRemainingSeconds.value}");
-    printInfo(info: "syncOtpStatus ◀◀");
   }
 
   String generateOTP() {

@@ -11,12 +11,12 @@ class DashboardController extends GetxController {
 
   @override
   void onInit() {
-    name.value = box.read<String>(kUserName) ?? '';
+    name.value = box.read<String>(kKeyUserName) ?? '';
     super.onInit();
   }
 
   void getUserName() {
-    var userName = box.read<String>(kUserName);
+    var userName = box.read<String>(kKeyUserName);
     if (userName != null) {
       name.value = userName;
     }

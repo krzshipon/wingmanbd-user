@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:super_ui_kit/super_ui_kit.dart';
+import 'package:wingmanbd/app/data/data_keys.dart';
 import 'app/data/asset_keys.dart';
 import 'app/routes/app_pages.dart';
 import 'app/services/auth_service.dart';
@@ -55,8 +56,8 @@ initServices() async {
   ///Initializing.. realm service
   final realmConfig =
       json.decode(await rootBundle.loadString(kRealmConfigFile));
-  String appId = realmConfig['appId'];
-  Uri baseUrl = Uri.parse(realmConfig['baseUrl']);
+  String appId = realmConfig[kKeyAtlasAppID];
+  Uri baseUrl = Uri.parse(realmConfig[kKeyAtlasBaseUrl]);
   await Get.putAsync(() => AuthService().init(appId, baseUrl));
 
   ///Initialize DB Service

@@ -13,7 +13,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    box.write(kUserLastAuthType, kAuthTypeLogin);
+    box.write(kKeyUserLastAuthType, kAuthTypeLogin);
     super.onInit();
     pageController = PageController(initialPage: selectedIndex.value);
   }

@@ -2,6 +2,7 @@
 
 import 'package:realm/realm.dart';
 import 'package:super_ui_kit/super_ui_kit.dart';
+import 'package:wingmanbd/app/util/app_constants.dart';
 
 import '../data/data_keys.dart';
 import '../data/models/schema.dart';
@@ -62,11 +63,11 @@ class DbService extends GetxService {
 
       final reviewQuery = realm!.all<Review>();
       final reviewSub = realm?.subscriptions.findByName(reviewSubName);
-      
+
       final feedbackQuery = realm!.all<Feedback>();
       final feedbackSub = realm?.subscriptions.findByName(feedbackSubName);
 
-      //if (realm?.subscriptions.isEmpty ?? false) {
+      // if (realm?.subscriptions.isEmpty ?? false) {
       //if (profileSub == null) {
       realm?.subscriptions.update((mutableSubscriptions) {
         mutableSubscriptions.clear();
@@ -84,7 +85,7 @@ class DbService extends GetxService {
       });
       await realm?.subscriptions.waitForSynchronization();
       //}
-      //}
+      // }
       bindProfile(user);
     } else {
       close();
@@ -92,7 +93,7 @@ class DbService extends GetxService {
   }
 
   Future<void> close() async {
-    box.remove(kUserName);
+    box.remove(kKeyUserName);
     if (_authService.currentUser.value != null) {
       await _authService.currentUser.value?.logOut();
       _authService.currentUser.value = null;
@@ -107,21 +108,43 @@ class DbService extends GetxService {
     super.onClose();
   }
 
-  void bindProfile(User? user) {
+  void bindProfile(User? user) async {
     if (user != null && realm != null) {
+      await user.refreshCustomData().then((value) =>
+          printInfo(info: "bindProfile => User custom data: $value"));
       // User is logged in & realm exist...
       var query = r'userId == $0';
-      var profileStream = realm!
-          .all<Profile>()
-          .changes
-          .map((profileEvent) => profileEvent.results);
-      profileStream.listen((results) {
-        if (results.isNotEmpty) {
-          profile.value = results[0];
-          profile.refresh();
-          box.write(kUserName, profile.value?.name);
-        }
-      });
+      var userProfile = realm!.query<Profile>(query, [user.id]);
+      if (userProfile.isNotEmpty) {
+        profile.value = userProfile.first;
+        profile.refresh();
+        syncProfileData();
+      } else {
+        realm?.writeAsync(() => realm?.add(Profile(
+            ObjectId(),
+            kOrgId,
+            _authService.currentUser.value?.id ?? ObjectId().hexString,
+            DateTime.now(),
+            lastDonatedAt: DateTime.now())));
+        printError(info: "bindProfile [X] => user not found in db");
+      }
+    }
+  }
+
+  void syncProfileData() {
+    Map<String, dynamic>? profilePendingData = box.read(kKeyUserPendingProfile);
+    printInfo(
+        info:
+            "DbService >> syncProfileData > profilePendingData: $profilePendingData");
+    if (profile.value != null && profilePendingData != null) {
+      realm?.writeAsync(() {
+        profile.value?.orgId = kOrgId;
+        profile.value?.name = profilePendingData[kKeyUserName] ?? "";
+        profile.value?.mobile = profilePendingData[kKeyUserMobile] ?? "";
+        profile.value?.email = profilePendingData[kKeyUserEmail] ?? "";
+        profile.value?.bloodGroup =
+            profilePendingData[kKeyUserBloodGroup] ?? "";
+      }).then((value) => box.remove(kKeyUserPendingProfile));
     }
   }
 }

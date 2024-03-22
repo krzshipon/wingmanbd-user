@@ -11,8 +11,8 @@ import '../../../util/app_constants.dart';
 enum AuthType { SIGNIN, SIGNUP }
 
 class AuthController extends GetxController {
+  final GetStorage _box = GetStorage();
   final AuthService _authService = Get.find<AuthService>();
-  final GetStorage box = GetStorage();
 
   TextEditingController tcUserName = TextEditingController();
   TextEditingController tcUserMobile = TextEditingController();
@@ -24,13 +24,13 @@ class AuthController extends GetxController {
 
   final authType = AuthType.SIGNIN.obs;
 
+  final error = ''.obs;
   final errorName = ''.obs;
   final errorMobile = ''.obs;
   final errorPass = ''.obs;
   final errorConfirmPass = ''.obs;
   final errorEmail = ''.obs;
   final errorGroup = ''.obs;
-  final error = ''.obs;
 
   final hasError = false.obs;
 
@@ -43,29 +43,10 @@ class AuthController extends GetxController {
     bindListeners();
   }
 
-  void bindListeners() {
-    tcUserName.addListener(() {
-      errorName.value = '';
-      error.value = '';
-    });
-    tcUserMobile.addListener(() {
-      errorMobile.value = '';
-      error.value = '';
-      box.write(kUserEmail, tcUserMobile.text);
-    });
-    tcUserPass.addListener(() {
-      errorPass.value = '';
-      error.value = '';
-      box.write(kUserPass, tcUserPass.text);
-    });
-    tcUserConfirmPass.addListener(() {
-      errorConfirmPass.value = '';
-      error.value = '';
-    });
-    tcUserEmail.addListener(() {
-      errorEmail.value = '';
-      error.value = '';
-    });
+  @override
+  void onReady() {
+    super.onReady();
+    syncAuth();
   }
 
   @override
@@ -78,117 +59,99 @@ class AuthController extends GetxController {
     tcUserEmail.dispose();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-    authType.value = box.read(kUserLastAuthType) == kAuthTypeLogin
+  void bindListeners() {
+    tcUserName.addListener(() {
+      errorName.value = '';
+      error.value = '';
+    });
+    tcUserMobile.addListener(() {
+      errorMobile.value = '';
+      error.value = '';
+      _box.write(kKeyUserEmail, tcUserMobile.text);
+    });
+    tcUserPass.addListener(() {
+      errorPass.value = '';
+      error.value = '';
+      _box.write(kKeyUserPass, tcUserPass.text);
+    });
+    tcUserConfirmPass.addListener(() {
+      errorConfirmPass.value = '';
+      error.value = '';
+    });
+    tcUserEmail.addListener(() {
+      errorEmail.value = '';
+      error.value = '';
+    });
+  }
+
+  void syncAuth() {
+    authType.value = _box.read(kKeyUserLastAuthType) == kAuthTypeLogin
         ? AuthType.SIGNIN
         : AuthType.SIGNUP;
 
     if (authType.value == AuthType.SIGNIN) {
-      tcUserMobile.text = box.read(kUserEmail) ?? "";
-      tcUserPass.text = box.read(kUserPass) ?? "";
+      tcUserMobile.text = _box.read(kKeyUserEmail) ?? '';
+      tcUserPass.text = _box.read(kKeyUserPass) ?? '';
     }
   }
 
-  authenticateUser() async {
+  void authenticateUser() async {
+    printInfo(info: 'authenticateUser => Auth Type: ${authType.value}');
     //Hide keyboard first
     hideKeyBoard();
     //Check inputted data
     validateFields();
     //Check if there is any validation error
+    printInfo(info: 'authenticateUser => hasError: $hasError');
     if (hasError.isFalse) {
       Get.showLoader();
       if (authType.value == AuthType.SIGNIN) {
-        try {
-          await _authService.logInUserEmailPw(
-              tcUserMobile.text, tcUserPass.text);
+        printInfo(info: 'authenticateUser => Log In ->');
+        await _authService
+            .logInUserEmailPw(tcUserMobile.text, tcUserPass.text)
+            .then((value) {
+          printInfo(info: 'authenticateUser => Log In -> Success');
           Get.hideLoader();
           Get.offNamed(Routes.HOME);
-        } catch (err) {
+        }).onError((err, stackTrace) {
+          printError(
+              info: 'authenticateUser => Log In -> Error: ${err.toString()}');
           Get.hideLoader();
           error.value = 'auth_error_sign_in'.tr;
-          printError(info: 'Auth Error: ${err.toString()}');
-        }
+        });
       } else {
-        try {
-          await _authService.registerUserEmailPw(
-              tcUserMobile.text, tcUserPass.text);
+        printInfo(info: 'authenticateUser => Register ->');
+        await _authService
+            .registerUserEmailPw(tcUserMobile.text, tcUserPass.text)
+            .then((value) {
+          printInfo(info: 'authenticateUser => Register -> Success');
+          saveUserData();
           Get.hideLoader();
           Get.toNamed(Routes.OTP);
-
-          // if (_authService.currentUser.value != null) {
-          //   updateProfile();
-          // } else {
-          //   authType.value = AuthType.SIGNIN;
-          // }
-        } catch (err) {
-          Get.hideLoader();
+        }).onError((err, stackTrace) {
+          printError(
+              info: 'authenticateUser => Register -> Error: ${err.toString()}');
           error.value = 'auth_error_sign_up'.tr;
           authType.value = AuthType.SIGNIN;
-          printError(info: 'Auth Error: ${err.toString()}');
-        }
+          Get.hideLoader();
+        });
       }
     }
-  }
-
-  updateProfile() async {
-    Get.showLoader();
-    final updatedCustomUserData = {
-      "orgId": '1',
-      "userId": _authService.currentUser.value?.id,
-      "name": tcUserName.text,
-      "mobile": tcUserMobile.text,
-      "email": tcUserEmail.text,
-      "imgSrc": "",
-      "bloodGroup": userBloodGroup.value,
-      "availability": 'AVAILABLE',
-      "address": null,
-      "location": null
-    };
-
-    await _authService.currentUser.value?.functions
-        .call(kfUpdateUserProfile, [updatedCustomUserData]).then((value) {
-      _authService.refreshUserData().then((value) {
-        Get.hideLoader();
-        Get.offAllNamed(Routes.HOME);
-      }).catchError((e) {
-        Get.hideLoader();
-      });
-    }).catchError(
-      (e) {
-        Get.hideLoader();
-        error.value = 'auth_error_sign_up'.tr;
-        authType.value = AuthType.SIGNIN;
-        printError(info: 'Auth Error: ${e.toString()}');
-      },
-    );
   }
 
   switchAuthType() {
     authType.value = authType.value == AuthType.SIGNIN
         ? AuthType.SIGNUP
         : authType.value = AuthType.SIGNIN;
-    box.write(kUserLastAuthType,
+    _box.write(kKeyUserLastAuthType,
         authType.value == AuthType.SIGNIN ? kAuthTypeLogin : kAuthTypeSignup);
     clearErrors();
     clearMobile();
     clearPassword();
     if (authType.value == AuthType.SIGNIN) {
-      tcUserMobile.text = box.read(kUserEmail) ?? "";
-      tcUserPass.text = box.read(kUserPass) ?? "";
+      tcUserMobile.text = _box.read(kKeyUserEmail) ?? '';
+      tcUserPass.text = _box.read(kKeyUserPass) ?? '';
     }
-  }
-
-  void clearErrors() {
-    error.value = '';
-    errorName.value = '';
-    errorMobile.value = '';
-    errorPass.value = '';
-    errorConfirmPass.value = '';
-    errorEmail.value = '';
-    errorGroup.value = '';
-    hasError.value = false;
   }
 
   void validateFields() {
@@ -231,6 +194,17 @@ class AuthController extends GetxController {
     }
   }
 
+  void clearErrors() {
+    error.value = '';
+    errorName.value = '';
+    errorMobile.value = '';
+    errorPass.value = '';
+    errorConfirmPass.value = '';
+    errorEmail.value = '';
+    errorGroup.value = '';
+    hasError.value = false;
+  }
+
   void clearPassword() {
     tcUserPass.clear();
     tcUserConfirmPass.clear();
@@ -240,11 +214,24 @@ class AuthController extends GetxController {
     tcUserMobile.clear();
   }
 
-  updateGroup(String? value) {
-    printInfo(info: 'updateGroup ▶ value: $value');
+  void updateGroup(String? value) {
+    printInfo(info: 'updateGroup >>> value: $value');
     if (value != null && kBloodGroups.contains(value)) {
       errorGroup.value = '';
       userBloodGroup.value = value;
     }
+  }
+
+  void saveUserData() {
+    printInfo(info: 'saveUserData >-> Saving User Data...');
+    _box.write(kKeyUserName, tcUserName.text);
+    final updatedCustomUserData = {
+      kKeyUserName: tcUserName.text,
+      kKeyUserMobile: tcUserMobile.text,
+      kKeyUserEmail: tcUserEmail.text,
+      kKeyUserBloodGroup: userBloodGroup.value
+    };
+    _box.write(kKeyUserPendingProfile, updatedCustomUserData);
+    printInfo(info: 'saveUserData => User Data Saved <-<');
   }
 }
