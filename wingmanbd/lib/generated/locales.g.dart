@@ -63,13 +63,19 @@ class LocaleKeys {
   static const setting_item_version = 'setting_item_version';
   static const profile_title = 'profile_title';
   static const profile_item_address_book = 'profile_item_address_book';
+  static const profile_item_change_group = 'profile_item_change_group';
   static const profile_item_change_mobile = 'profile_item_change_mobile';
   static const profile_item_change_password = 'profile_item_change_password';
   static const profile_item_logout = 'profile_item_logout';
   static const profile_label_name = 'profile_label_name';
   static const profile_label_email = 'profile_label_email';
   static const profile_error_name = 'profile_error_name';
+  static const profile_error_mobile = 'profile_error_mobile';
   static const profile_error_email = 'profile_error_email';
+  static const profile_dialog_group_title = 'profile_dialog_group_title';
+  static const profile_dialog_group_desc = 'profile_dialog_group_desc';
+  static const profile_snack_group_title = 'profile_snack_group_title';
+  static const profile_snack_group_msg = 'profile_snack_group_msg';
   static const address_title = 'address_title';
   static const address_label_name = 'address_label_name';
   static const address_label_mobile = 'address_label_mobile';
@@ -136,6 +142,10 @@ class LocaleKeys {
       'donation_request_item_label_contact';
   static const donation_request_item_label_time =
       'donation_request_item_label_time';
+  static const address_dialog_group_title = 'address_dialog_group_title';
+  static const address_dialog_group_desc = 'address_dialog_group_desc';
+  static const address_snack_group_title = 'address_snack_group_title';
+  static const address_snack_group_msg = 'address_snack_group_msg';
 }
 
 class Locales {
@@ -187,13 +197,20 @@ class Locales {
     'setting_item_version': 'Version',
     'profile_title': 'Profile',
     'profile_item_address_book': 'Address Book',
+    'profile_item_change_group': 'Change Blood Group',
     'profile_item_change_mobile': 'Change Mobile',
     'profile_item_change_password': 'Change Password',
     'profile_item_logout': 'Logout',
     'profile_label_name': 'Name',
     'profile_label_email': 'Email',
     'profile_error_name': 'Loading...',
+    'profile_error_mobile': 'Loading...',
     'profile_error_email': 'No email address provided yet!',
+    'profile_dialog_group_title': 'Are you sure?',
+    'profile_dialog_group_desc':
+        'Changing your blood type can affect blood donation safety. Be accurate and seek medical advice if unsure.',
+    'profile_snack_group_title': 'Blood Group successfully changed.',
+    'profile_snack_group_msg': 'Thank you for updating your information.',
     'address_title': 'Address',
     'address_label_name': 'Name: ',
     'address_label_mobile': 'Mobile: ',
@@ -291,12 +308,14 @@ class Locales {
     'setting_item_version': 'Version',
     'profile_title': 'Profile',
     'profile_item_address_book': 'Address Book',
+    'profile_item_change_group': 'Change Blood Group',
     'profile_item_change_mobile': 'Change Mobile',
     'profile_item_change_password': 'Change Password',
     'profile_item_logout': 'Logout',
     'profile_label_name': 'Name',
     'profile_label_email': 'Email',
     'profile_error_name': 'Loading...',
+    'profile_error_mobile': 'Loading...',
     'profile_error_email': 'No email address provided yet!',
     'address_title': 'Address',
     'address_label_name': 'Name: ',
@@ -315,6 +334,11 @@ class Locales {
     'address_error_division': 'Please select a division',
     'address_error_city': 'Please select a city',
     'address_error_area': 'Please select a area',
+    'address_dialog_group_title': 'Are you sure?',
+    'address_dialog_group_desc':
+        'Changing your blood type can affect blood donation safety. Be accurate and seek medical advice if unsure.',
+    'address_snack_group_title': 'Blood Group successfully changed.',
+    'address_snack_group_msg': 'Thank you for updating your information.',
     'donation_history_title': 'Past Donations',
     'donation_history_item_label_seeker_name': 'Patient:',
     'donation_history_item_label_problem': 'Problem:',

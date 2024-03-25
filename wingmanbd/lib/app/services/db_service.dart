@@ -67,25 +67,30 @@ class DbService extends GetxService {
       final feedbackQuery = realm!.all<Feedback>();
       final feedbackSub = realm?.subscriptions.findByName(feedbackSubName);
 
-      // if (realm?.subscriptions.isEmpty ?? false) {
-      //if (profileSub == null) {
       realm?.subscriptions.update((mutableSubscriptions) {
-        mutableSubscriptions.clear();
         // server-side rules ensure user only downloads their own info
-        mutableSubscriptions.add(profileQuery,
-            name: profileSubName, update: true);
-        mutableSubscriptions.add(areaDataQuery,
-            name: areaDataSubName, update: true);
-        mutableSubscriptions.add(donationQuery,
-            name: donationSubName, update: true);
-        mutableSubscriptions.add(reviewQuery,
-            name: reviewSubName, update: true);
-        mutableSubscriptions.add(feedbackQuery,
-            name: feedbackSubName, update: true);
+        if (profileSub == null) {
+          mutableSubscriptions.add(profileQuery,
+              name: profileSubName, update: true);
+        }
+        if (areaDataSub == null) {
+          mutableSubscriptions.add(areaDataQuery,
+              name: areaDataSubName, update: true);
+        }
+        if (donationSub == null) {
+          mutableSubscriptions.add(donationQuery,
+              name: donationSubName, update: true);
+        }
+        if (reviewSub == null) {
+          mutableSubscriptions.add(reviewQuery,
+              name: reviewSubName, update: true);
+        }
+        if (feedbackSub == null) {
+          mutableSubscriptions.add(feedbackQuery,
+              name: feedbackSubName, update: true);
+        }
       });
       await realm?.subscriptions.waitForSynchronization();
-      //}
-      // }
       bindProfile(user);
     } else {
       close();
@@ -120,11 +125,8 @@ class DbService extends GetxService {
         profile.refresh();
         syncProfileData();
       } else {
-        realm?.writeAsync(() => realm?.add(Profile(
-            ObjectId(),
-            kOrgId,
-            _authService.currentUser.value?.id ?? ObjectId().hexString,
-            DateTime.now(),
+        realm?.writeAsync(() => realm?.add(Profile(ObjectId(), kOrgId,
+            _authService.currentUser.value?.id ?? '', DateTime.now(),
             lastDonatedAt: DateTime.now())));
         printError(info: "bindProfile [X] => user not found in db");
       }

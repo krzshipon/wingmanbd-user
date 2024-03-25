@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:super_ui_kit/super_ui_kit.dart';
 import 'package:wingmanbd/app/data/models/schema.dart';
 
 import '../../../data/asset_keys.dart';
+import '../../../util/app_constants.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -12,7 +15,7 @@ class ProfileView extends GetView<ProfileController> {
     return CSHomeWidget(
       floatingActionButton: Obx(
         () => CSIconButton(
-          icon: controller.editModeActive.value
+          icon: controller.editMode.value != ProfileEditMode.noEdit
               ? Icons.check_sharp
               : Icons.edit_sharp,
           onTap: () => controller.onEditButtonTap(),
@@ -49,11 +52,34 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                     ),
               verticalSpaceTiny,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Obx(
+                    () => CSText(
+                      controller.dbService.profile.value?.bloodGroup ??
+                          'profile_error_group'.tr,
+                      color: Get.theme.colorScheme.primary,
+                      style: Get.textTheme.bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
               Obx(
                 () => Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    (!controller.editModeActive.value)
+                    CSText(controller.dbService.profile.value?.mobile ??
+                        'profile_error_mobile'.tr)
+                  ],
+                ),
+              ),
+              Obx(
+                () => Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    (controller.editMode.value != ProfileEditMode.profile)
                         ? CSText.title(
                             controller.dbService.profile.value?.name ??
                                 'profile_error_name'.tr)
@@ -71,29 +97,6 @@ class ProfileView extends GetView<ProfileController> {
                   ],
                 ),
               ),
-              Obx(
-                () => Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    (!controller.editModeActive.value)
-                        ? CSText.label(
-                            controller.dbService.profile.value?.email ??
-                                'profile_error_email'.tr)
-                        : Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: CSInputField(
-                                maxLines: 1,
-                                controller: controller.tcEmail,
-                                placeholder: 'profile_label_email'.tr,
-                                inputType: TextInputType.emailAddress,
-                              ),
-                            ),
-                          ),
-                  ],
-                ),
-              ),
-              verticalSpaceTiny,
               Obx(
                 () => Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -141,6 +144,24 @@ class ProfileView extends GetView<ProfileController> {
           Expanded(
             child: ListView(
               children: [
+                Obx(
+                  () => (controller.editMode.value == ProfileEditMode.group)
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: CSDropDown(
+                            [...kBloodGroups],
+                            header: "auth_label_group".tr,
+                            onValueChange: (value) =>
+                                controller.updateGroup(value),
+                            value: controller.bloodGroup.value,
+                            error: controller.errorGroup.value,
+                          ))
+                      : ProfileItem(
+                          iconData: Icons.bloodtype,
+                          title: 'profile_item_change_group'.tr,
+                          onTap: () => controller.changeBloodGroup(),
+                        ),
+                ),
                 ProfileItem(
                   iconData: Icons.call_end_sharp,
                   title: 'profile_item_change_mobile'.tr,

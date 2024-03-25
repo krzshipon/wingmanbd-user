@@ -6,6 +6,7 @@ import '../data/models/language.dart';
 extension ValidationExtension on String {
   bool get isValidName => length > 0;
   bool get isValidPassword => length > 7;
+  bool get isValidMobile => (length == 11 || length == 14);
 }
 
 extension Languageparsing on String {

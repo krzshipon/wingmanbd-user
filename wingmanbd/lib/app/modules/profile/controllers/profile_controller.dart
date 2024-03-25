@@ -1,30 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:super_ui_kit/super_ui_kit.dart';
+import 'package:wingmanbd/app/data/data_keys.dart';
 import 'package:wingmanbd/app/data/models/schema.dart';
 import 'package:wingmanbd/app/extensions/string_ext.dart';
+import 'package:wingmanbd/app/util/app_constants.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/db_service.dart';
+
+enum ProfileEditMode { profile, group, mobile, pass, noEdit }
 
 class ProfileController extends GetxController {
   final AuthService _authService = Get.find<AuthService>();
   final DbService dbService = Get.find<DbService>();
 
   final tcName = TextEditingController();
-  final tcEmail = TextEditingController();
+  final tcPass = TextEditingController();
+  final tcConfirmPass = TextEditingController();
 
+  final bloodGroup = kBloodGroups.first.obs;
+
+  final error = ''.obs;
   final errorName = ''.obs;
   final errorEmail = ''.obs;
-  final error = ''.obs;
-  final hasError = false.obs;
+  final errorGroup = ''.obs;
 
-  final editModeActive = false.obs;
+  final hasError = false.obs;
+  final editMode = ProfileEditMode.noEdit.obs;
 
   @override
   void onInit() {
     super.onInit();
     bindListeners();
+    bindInitialData();
   }
 
   void bindListeners() {
@@ -32,32 +41,46 @@ class ProfileController extends GetxController {
       errorName.value = '';
       error.value = '';
     });
-    tcEmail.addListener(() {
-      errorEmail.value = '';
-      error.value = '';
-    });
+    tcName.text = dbService.profile.value?.name ?? '';
+  }
+
+  void bindInitialData() {
+    bloodGroup.value =
+        dbService.profile.value?.bloodGroup ?? kBloodGroups.first;
   }
 
   @override
   void onClose() {
     tcName.dispose();
-    tcEmail.dispose();
     super.onClose();
   }
 
   void onEditButtonTap() {
     //hide keyboard first...
     hideKeyBoard();
-    //check edit mode is active...
-    if (editModeActive.isTrue) {
-      //Submit changes
-      updateProfile();
-    } else {
-      tcName.text = dbService.profile.value?.name ?? '';
-      tcEmail.text = dbService.profile.value?.email ?? '';
+    //check edit mode..
+    //Submit changes
+    switch (editMode.value) {
+      case ProfileEditMode.profile:
+        updateProfile();
+        editMode.value = ProfileEditMode.noEdit;
+        break;
+      case ProfileEditMode.group:
+        updateBloodGroup();
+        editMode.value = ProfileEditMode.noEdit;
+        break;
+      case ProfileEditMode.mobile:
+        updateMobile();
+        editMode.value = ProfileEditMode.noEdit;
+        break;
+      case ProfileEditMode.pass:
+        updatePass();
+        editMode.value = ProfileEditMode.noEdit;
+        break;
+      case ProfileEditMode.noEdit:
+        editMode.value = ProfileEditMode.profile;
+        break;
     }
-    //Toggle the value now
-    editModeActive.toggle();
   }
 
   logOut() async {
@@ -65,6 +88,19 @@ class ProfileController extends GetxController {
     await _authService.logOutUser();
     Get.hideLoader();
     Get.offAllNamed(Routes.AUTH);
+  }
+
+  changeBloodGroup() {
+    Get.showDialog(
+      "profile_dialog_group_desc".tr,
+      title: 'profile_dialog_group_title'.tr,
+      dialogType: DialogType.alert,
+      onConfirm: () {
+        Get.back();
+        editMode.value = ProfileEditMode.group;
+      },
+      onCancel: () => {},
+    );
   }
 
   changeMobile() {
@@ -86,10 +122,58 @@ class ProfileController extends GetxController {
         dbService.realm?.write(
           () => {
             dbService.profile.value?.name = tcName.text,
-            dbService.profile.value?.email = tcEmail.text,
           },
         );
       }
+    }
+  }
+
+  updateBloodGroup() {
+    //Hide keyboard first
+    hideKeyBoard();
+    //Check inputted data
+    validateFields();
+    //Check if there is any validation error
+    if (hasError.isFalse) {
+      if (dbService.profile.value != null &&
+          kBloodGroups.contains(bloodGroup.value)) {
+        dbService.realm?.write(
+          () {
+            dbService.profile.value?.bloodGroup = bloodGroup.value;
+            dbService.profile.refresh();
+            Get.snackbar(
+                "profile_snack_group_title".tr, "profile_snack_group_msg".tr);
+          },
+        );
+      }
+    }
+  }
+
+  updateMobile() {
+    //Hide keyboard first
+    hideKeyBoard();
+    //Check inputted data
+    validateFields();
+    //Check if there is any validation error
+    if (hasError.isFalse) {
+      if (dbService.profile.value != null) {
+        dbService.realm?.write(
+          () => {
+            dbService.profile.value?.mobile = tcName.text,
+          },
+        );
+      }
+    }
+  }
+
+  updatePass() {
+    //Hide keyboard first
+    hideKeyBoard();
+    //Check inputted data
+    validateFields();
+    //Check if there is any validation error
+    if (hasError.isFalse) {
+      //TODO: Need to implement password change...
     }
   }
 
@@ -101,10 +185,10 @@ class ProfileController extends GetxController {
       hasError.value = true;
       errorName.value = 'auth_error_mobile'.tr;
     }
-    //Pass
-    if (!tcEmail.text.isEmail) {
+    //Blood Group
+    if (bloodGroup.isEmpty || !kBloodGroups.contains(bloodGroup.value)) {
       hasError.value = true;
-      errorEmail.value = 'auth_error_email'.tr;
+      errorGroup.value = 'auth_error_group'.tr;
     }
   }
 
@@ -114,5 +198,13 @@ class ProfileController extends GetxController {
           value ? Availability.AVAILABLE : Availability.UNAVAILABLE;
       dbService.profile.refresh();
     });
+  }
+
+  void updateGroup(String? value) {
+    printInfo(info: 'updateGroup >>> value: $value');
+    if (value != null && kBloodGroups.contains(value)) {
+      errorGroup.value = '';
+      bloodGroup.value = value;
+    }
   }
 }

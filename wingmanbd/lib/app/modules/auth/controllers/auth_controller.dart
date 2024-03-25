@@ -158,7 +158,7 @@ class AuthController extends GetxController {
     hasError.value = false;
     //validate common data first
     //Mobile
-    if (!tcUserMobile.text.isPhoneNumber) {
+    if (!tcUserMobile.text.isPhoneNumber || !tcUserMobile.text.isValidMobile) {
       hasError.value = true;
       errorMobile.value = 'auth_error_mobile'.tr;
     }

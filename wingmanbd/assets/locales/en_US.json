@@ -77,6 +77,7 @@
         "title": "Profile",
         "item": {
             "address_book": "Address Book",
+            "change_group": "Change Blood Group",
             "change_mobile": "Change Mobile",
             "change_password": "Change Password",
             "logout": "Logout"
@@ -87,7 +88,20 @@
         },
         "error": {
             "name": "Loading...",
+            "mobile": "Loading...",
             "email": "No email address provided yet!"
+        },
+        "dialog": {
+            "group": {
+                "title": "Are you sure?",
+                "desc": "Changing your blood type can affect blood donation safety. Be accurate and seek medical advice if unsure."
+            }
+        },
+        "snack": {
+            "group": {
+                "title": "Blood Group successfully changed.",
+                "msg": "Thank you for updating your information."
+            }
         }
     },
     "address": {

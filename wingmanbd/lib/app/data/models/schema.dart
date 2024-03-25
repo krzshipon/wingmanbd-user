@@ -108,7 +108,7 @@ class _Profile {
   String email = '';
   String role = UserRole.USER;
   String imgSrc = '';
-  int rating = -1;
+  int rating = 0;
   List<_Review> recentReviews = List.empty();
 
   _Address? address;
