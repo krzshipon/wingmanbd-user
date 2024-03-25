@@ -101,6 +101,10 @@
             "group": {
                 "title": "Blood Group successfully changed.",
                 "msg": "Thank you for updating your information."
+            },
+            "profile": {
+                "title": "Profile successfully updated.",
+                "msg": "Thank you for updating your information."
             }
         }
     },

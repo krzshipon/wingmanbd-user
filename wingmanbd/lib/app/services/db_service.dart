@@ -25,8 +25,17 @@ class DbService extends GetxService {
   void onInit() {
     super.onInit();
     initDb(_authService.currentUser.value);
+    bindListeners();
+  }
+
+  void bindListeners() {
     _authService.currentUser.listen((user) {
       initDb(user);
+    });
+    profile.listen((profile) {
+      if (profile != null && profile.name.isNotEmpty) {
+        box.write(kKeyUserName, profile.name);
+      }
     });
   }
 
@@ -91,7 +100,7 @@ class DbService extends GetxService {
         }
       });
       await realm?.subscriptions.waitForSynchronization();
-      bindProfile(user);
+      bindUser(user);
     } else {
       close();
     }
@@ -113,10 +122,10 @@ class DbService extends GetxService {
     super.onClose();
   }
 
-  void bindProfile(User? user) async {
+  void bindUser(User? user) async {
     if (user != null && realm != null) {
-      await user.refreshCustomData().then((value) =>
-          printInfo(info: "bindProfile => User custom data: $value"));
+      // await user.refreshCustomData().then(
+      //     (value) => printInfo(info: "bindUser => User custom data: $value")); //TODO: use this in fututre when supports updating user custom data directly
       // User is logged in & realm exist...
       var query = r'userId == $0';
       var userProfile = realm!.query<Profile>(query, [user.id]);
@@ -125,10 +134,16 @@ class DbService extends GetxService {
         profile.refresh();
         syncProfileData();
       } else {
-        realm?.writeAsync(() => realm?.add(Profile(ObjectId(), kOrgId,
-            _authService.currentUser.value?.id ?? '', DateTime.now(),
-            lastDonatedAt: DateTime.now())));
-        printError(info: "bindProfile [X] => user not found in db");
+        realm?.writeAsync(() => realm?.add(Profile(
+              ObjectId(),
+              kOrgId,
+              _authService.currentUser.value?.id ?? '',
+              DateTime.now(),
+              lastDonatedAt: DateTime.now(),
+            )));
+        printError(
+            info:
+                "bindUser [X]=> user not found in db. Creating a new profile ->");
       }
     }
   }

@@ -89,6 +89,7 @@ class ProfileView extends GetView<ProfileController> {
                               child: CSInputField(
                                 maxLines: 1,
                                 controller: controller.tcName,
+                                focusNode: controller.fnName,
                                 placeholder: 'profile_label_name'.tr,
                                 inputType: TextInputType.name,
                               ),

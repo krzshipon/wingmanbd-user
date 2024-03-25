@@ -76,6 +76,8 @@ class LocaleKeys {
   static const profile_dialog_group_desc = 'profile_dialog_group_desc';
   static const profile_snack_group_title = 'profile_snack_group_title';
   static const profile_snack_group_msg = 'profile_snack_group_msg';
+  static const profile_snack_profile_title = 'profile_snack_profile_title';
+  static const profile_snack_profile_msg = 'profile_snack_profile_msg';
   static const address_title = 'address_title';
   static const address_label_name = 'address_label_name';
   static const address_label_mobile = 'address_label_mobile';
@@ -146,6 +148,8 @@ class LocaleKeys {
   static const address_dialog_group_desc = 'address_dialog_group_desc';
   static const address_snack_group_title = 'address_snack_group_title';
   static const address_snack_group_msg = 'address_snack_group_msg';
+  static const address_snack_profile_title = 'address_snack_profile_title';
+  static const address_snack_profile_msg = 'address_snack_profile_msg';
 }
 
 class Locales {
@@ -211,6 +215,8 @@ class Locales {
         'Changing your blood type can affect blood donation safety. Be accurate and seek medical advice if unsure.',
     'profile_snack_group_title': 'Blood Group successfully changed.',
     'profile_snack_group_msg': 'Thank you for updating your information.',
+    'profile_snack_profile_title': 'Profile successfully updated.',
+    'profile_snack_profile_msg': 'Thank you for updating your information.',
     'address_title': 'Address',
     'address_label_name': 'Name: ',
     'address_label_mobile': 'Mobile: ',
@@ -339,6 +345,8 @@ class Locales {
         'Changing your blood type can affect blood donation safety. Be accurate and seek medical advice if unsure.',
     'address_snack_group_title': 'Blood Group successfully changed.',
     'address_snack_group_msg': 'Thank you for updating your information.',
+    'address_snack_profile_title': 'Profile successfully updated.',
+    'address_snack_profile_msg': 'Thank you for updating your information.',
     'donation_history_title': 'Past Donations',
     'donation_history_item_label_seeker_name': 'Patient:',
     'donation_history_item_label_problem': 'Problem:',

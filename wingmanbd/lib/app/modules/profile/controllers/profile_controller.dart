@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:super_ui_kit/super_ui_kit.dart';
-import 'package:wingmanbd/app/data/data_keys.dart';
 import 'package:wingmanbd/app/data/models/schema.dart';
 import 'package:wingmanbd/app/extensions/string_ext.dart';
 import 'package:wingmanbd/app/util/app_constants.dart';
@@ -16,6 +15,7 @@ class ProfileController extends GetxController {
   final DbService dbService = Get.find<DbService>();
 
   final tcName = TextEditingController();
+  final fnName = FocusNode();
   final tcPass = TextEditingController();
   final tcConfirmPass = TextEditingController();
 
@@ -36,6 +36,15 @@ class ProfileController extends GetxController {
     bindInitialData();
   }
 
+  @override
+  void onClose() {
+    tcName.dispose();
+    fnName.dispose();
+    tcPass.dispose();
+    tcConfirmPass.dispose();
+    super.onClose();
+  }
+
   void bindListeners() {
     tcName.addListener(() {
       errorName.value = '';
@@ -47,12 +56,6 @@ class ProfileController extends GetxController {
   void bindInitialData() {
     bloodGroup.value =
         dbService.profile.value?.bloodGroup ?? kBloodGroups.first;
-  }
-
-  @override
-  void onClose() {
-    tcName.dispose();
-    super.onClose();
   }
 
   void onEditButtonTap() {
@@ -79,6 +82,7 @@ class ProfileController extends GetxController {
         break;
       case ProfileEditMode.noEdit:
         editMode.value = ProfileEditMode.profile;
+        fnName.requestFocus();
         break;
     }
   }
@@ -122,6 +126,9 @@ class ProfileController extends GetxController {
         dbService.realm?.write(
           () => {
             dbService.profile.value?.name = tcName.text,
+            dbService.profile.refresh(),
+            Get.snackbar("profile_snack_profile_title".tr,
+                "profile_snack_profile_msg".tr)
           },
         );
       }

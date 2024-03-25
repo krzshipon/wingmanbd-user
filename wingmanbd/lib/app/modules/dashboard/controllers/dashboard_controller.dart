@@ -11,14 +11,12 @@ class DashboardController extends GetxController {
 
   @override
   void onInit() {
-    name.value = box.read<String>(kKeyUserName) ?? '';
     super.onInit();
+    bindInitialData();
   }
 
-  void getUserName() {
-    var userName = box.read<String>(kKeyUserName);
-    if (userName != null) {
-      name.value = userName;
-    }
+  void bindInitialData() {
+    name.value = box.read<String>(kKeyUserName) ?? '';
+    printInfo(info: 'bindInitialData => name: ${name.value}');
   }
 }
