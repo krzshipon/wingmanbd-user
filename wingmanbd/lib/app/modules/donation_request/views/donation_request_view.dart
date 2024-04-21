@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import 'package:super_ui_kit/super_ui_kit.dart';
+import 'package:wingmanbd/app/util/app_constants.dart';
 
 import '../controllers/donation_request_controller.dart';
 
@@ -27,28 +30,37 @@ class DonationRequestView extends GetView<DonationRequestController> {
                 CSText("donation_request_item_label_type".tr),
                 Row(
                   children: [
-                    CsCheckbox(
-                      true,
-                      (value) {},
-                      title: "BLOOD",
+                    Obx(
+                      () => CsCheckbox(
+                        controller.requestType.value == RequestType.blood,
+                        (value) {
+                          controller.changeReqType(RequestType.blood);
+                        },
+                        title: "BLOOD",
+                      ),
                     ),
-                    CsCheckbox(
-                      false,
-                      (value) {},
-                      title: "PLATELETS",
+                    Obx(
+                      () => CsCheckbox(
+                        controller.requestType.value == RequestType.platelet,
+                        (value) {
+                          controller.changeReqType(RequestType.platelet);
+                        },
+                        title: "PLATELETS",
+                      ),
                     ),
                   ],
                 ),
-                CSDropDown(
-                  ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'],
-                  header: "donation_request_item_label_group".tr,
-                  onValueChange: (p0) => {},
-                  value: 'A+',
-                ),
+                Obx(() => CSDropDown(
+                      [...kBloodGroups],
+                      header: "donation_request_item_label_group".tr,
+                      onValueChange: (group) =>
+                          {controller.setBloodGroup(group)},
+                      value: controller.userBloodGroup.value,
+                    )),
                 verticalSpaceRegular,
                 Obx(
                   () => CSInputField(
-                    controller: TextEditingController(),
+                    controller: controller.tcAmount,
                     placeholder: 'donation_request_item_label_quantity'.tr,
                     inputType: TextInputType.number,
                     errorText: controller.errorAmount.isNotEmpty

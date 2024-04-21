@@ -39,7 +39,7 @@ Future<void> main() async {
           ? AppPages.INITIAL
           : Routes.HOME,
       getPages: AppPages.routes,
-      theme: appThemeL,
+      theme: appThemeLight,
       darkTheme: appDarkTheme,
       enableLog: true,
       //initialBinding: BindingsBuilder(() => initServices()),

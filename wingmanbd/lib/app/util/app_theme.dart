@@ -4,7 +4,7 @@ import 'package:super_ui_kit/super_ui_kit.dart';
 //Nav bar properties
 const kcWaterDropColor = Colors.white;
 
-ThemeData appThemeL = appLightTheme.copyWith(
+ThemeData appThemeLight = appLightTheme.copyWith(
     colorScheme: lightColorScheme.copyWith(
       primary: const Color(0xFFEF4F7F),
       secondary: const Color(0xFFEF4F7F),
