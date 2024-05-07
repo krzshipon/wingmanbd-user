@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import 'package:super_ui_kit/super_ui_kit.dart';
 import 'package:wingmanbd/app/util/app_constants.dart';
@@ -69,6 +66,11 @@ class DonationRequestView extends GetView<DonationRequestController> {
                   ),
                 ),
                 verticalSpaceRegular,
+                Align(
+                  alignment: Alignment.center,
+                  child: CSText.title("Patient Info".tr),
+                ),
+                verticalSpaceSmall,
                 Obx(
                   () => CSInputField(
                     controller: TextEditingController(),
@@ -102,6 +104,11 @@ class DonationRequestView extends GetView<DonationRequestController> {
                   ),
                 ),
                 verticalSpaceRegular,
+                Align(
+                  alignment: Alignment.center,
+                  child: CSText.title("Address".tr),
+                ),
+                verticalSpaceSmall,
                 Obx(
                   () => CSInputField(
                     controller: TextEditingController(),
@@ -124,6 +131,35 @@ class DonationRequestView extends GetView<DonationRequestController> {
                   ),
                 ),
                 verticalSpaceRegular,
+                Obx(() => CSDropDown(
+                      [...kBloodGroups],
+                      header: "Division".tr,
+                      onValueChange: (group) =>
+                          {controller.setBloodGroup(group)},
+                      value: controller.userBloodGroup.value,
+                    )),
+                verticalSpaceRegular,
+                Obx(() => CSDropDown(
+                      [...kBloodGroups],
+                      header: "City".tr,
+                      onValueChange: (group) =>
+                          {controller.setBloodGroup(group)},
+                      value: controller.userBloodGroup.value,
+                    )),
+                verticalSpaceRegular,
+                Obx(() => CSDropDown(
+                      [...kBloodGroups],
+                      header: "Area".tr,
+                      onValueChange: (group) =>
+                          {controller.setBloodGroup(group)},
+                      value: controller.userBloodGroup.value,
+                    )),
+                verticalSpaceRegular,
+                Align(
+                  alignment: Alignment.center,
+                  child: CSText.title("Date & Time".tr),
+                ),
+                verticalSpaceSmall,
                 Obx(
                   () => CSInputField(
                     controller: TextEditingController(text: "23 March"),

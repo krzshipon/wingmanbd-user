@@ -16,20 +16,14 @@ class DonationRequestController extends GetxController {
   final tcAmount = TextEditingController();
   final errorAmount = ''.obs;
 
-  // final tcAmount = TextEditingController();
-  // final errorAmount = ''.obs;
+  final tcPatientName = TextEditingController();
+  final errorPatientName = ''.obs;
 
-  // final tcAmount = TextEditingController();
-  // final errorAmount = ''.obs;
+  final tcPatientNumber = TextEditingController();
+  final errorPatientNumber = ''.obs;
 
-  // final tcAmount = TextEditingController();
-  // final errorAmount = ''.obs;
-
-  // final tcAmount = TextEditingController();
-  // final errorAmount = ''.obs;
-
-  // final tcAmount = TextEditingController();
-  // final errorAmount = ''.obs;
+  final tcPatientProblem = TextEditingController();
+  final errorPatientProblem = ''.obs;
 
   @override
   void onInit() {
@@ -46,14 +40,6 @@ class DonationRequestController extends GetxController {
     super.onClose();
   }
 
-  saveDonationData() {
-    Get.showDialog(
-      'Request submitted. Please wait for the donor.',
-      onConfirm: () => Get.back(),
-      dialogType: DialogType.general,
-    );
-  }
-
   void changeReqType(RequestType reqType) {
     requestType.value = reqType;
     printInfo(info: "changeReqType => requestType: $reqType");
@@ -63,5 +49,13 @@ class DonationRequestController extends GetxController {
     if (kBloodGroups.contains(group)) {
       userBloodGroup.value = group!;
     }
+  }
+
+  saveDonationData() {
+    Get.showDialog(
+      'Request submitted. Please wait for the donor.',
+      onConfirm: () => Get.back(),
+      dialogType: DialogType.general,
+    );
   }
 }
